@@ -13,7 +13,7 @@ call save_npy("filename.npy", array)
 
 
 ### *.npz files
-In order to save .npz-files the commandline too "zip" has to be installed. By calling 
+In order to save .npz-files the commandline tool "zip" has to be installed. By calling 
 ```fortran
 call add_npz("example.npz", "temperature", data_array)
 ```
