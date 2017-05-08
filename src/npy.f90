@@ -19,8 +19,387 @@ module  m_npy
                          write_cmplx_dbl_vec, write_cmplx_dbl_mtx
 
     end interface save_npy
+    interface add_npz
+        module procedure addrpl_int8_vec,      addrpl_int8_mtx,      &
+                         addrpl_int16_vec,     addrpl_int16_mtx,     &
+                         addrpl_int32_vec,     addrpl_int32_mtx,     &
+                         addrpl_int64_vec,     addrpl_int64_mtx,     &
+                         addrpl_sng_vec,       addrpl_sng_mtx,       &
+                         addrpl_dbl_vec,       addrpl_dbl_mtx,       &
+                         addrpl_cmplx_dbl_vec, addrpl_cmplx_dbl_mtx, &
+                         addrpl_cmplx_sng_vec, addrpl_cmplx_sng_mtx
+    end interface add_npz
+
 contains
-    Subroutine  write_cmplx_sgn_mtx(filename, mtx)
+    subroutine addrpl_cmplx_sng_vec(zipfile, var_name, vec)
+        implicit none
+        complex(4), intent(in)           :: vec(:)
+        character(len=*), intent(in)     :: zipfile, var_name
+        character(len=:), allocatable    :: npy_name
+        integer                          :: succ
+
+        npy_name =  var_name // ".npy"
+
+        call save_npy(npy_name, vec)
+        ! just store and be quite while zipping
+        call execute_command_line("zip -0q " // zipfile &
+                                 // " " // npy_name, cmdstat=succ)
+        if(succ /=  0) then
+            write (*,*) "Can't execute zip command"
+        endif
+
+        call execute_command_line("rm " // npy_name, cmdstat=succ)
+        if(succ /=  0) then
+            write (*,*) "Can't execute rm command"
+        endif
+    end subroutine addrpl_cmplx_sng_vec
+    
+    subroutine addrpl_cmplx_sng_mtx(zipfile, var_name, mtx)
+        implicit none
+        complex(4), intent(in)           :: mtx(:,:)
+        character(len=*), intent(in)     :: zipfile, var_name
+        character(len=:), allocatable    :: npy_name
+        integer                          :: succ
+
+        npy_name =  var_name // ".npy"
+
+        call save_npy(npy_name, mtx)
+        ! just store and be quite while zipping
+        call execute_command_line("zip -0q " // zipfile &
+                                 // " " // npy_name, cmdstat=succ)
+        if(succ /=  0) then
+            write (*,*) "Can't execute zip command"
+        endif
+
+        call execute_command_line("rm " // npy_name, cmdstat=succ)
+        if(succ /=  0) then
+            write (*,*) "Can't execute rm command"
+        endif
+    end subroutine addrpl_cmplx_sng_mtx
+    
+    subroutine addrpl_cmplx_dbl_vec(zipfile, var_name, vec)
+        implicit none
+        complex(8), intent(in)           :: vec(:)
+        character(len=*), intent(in)     :: zipfile, var_name
+        character(len=:), allocatable    :: npy_name
+        integer                          :: succ
+
+        npy_name =  var_name // ".npy"
+
+        call save_npy(npy_name, vec)
+        ! just store and be quite while zipping
+        call execute_command_line("zip -0q " // zipfile &
+                                 // " " // npy_name, cmdstat=succ)
+        if(succ /=  0) then
+            write (*,*) "Can't execute zip command"
+        endif
+
+        call execute_command_line("rm " // npy_name, cmdstat=succ)
+        if(succ /=  0) then
+            write (*,*) "Can't execute rm command"
+        endif
+    end subroutine addrpl_cmplx_dbl_vec
+    
+    subroutine addrpl_cmplx_dbl_mtx(zipfile, var_name, mtx)
+        implicit none
+        complex(8), intent(in)           :: mtx(:,:)
+        character(len=*), intent(in)     :: zipfile, var_name
+        character(len=:), allocatable    :: npy_name
+        integer                          :: succ
+
+        npy_name =  var_name // ".npy"
+
+        call save_npy(npy_name, mtx)
+        ! just store and be quite while zipping
+        call execute_command_line("zip -0q " // zipfile &
+                                 // " " // npy_name, cmdstat=succ)
+        if(succ /=  0) then
+            write (*,*) "Can't execute zip command"
+        endif
+
+        call execute_command_line("rm " // npy_name, cmdstat=succ)
+        if(succ /=  0) then
+            write (*,*) "Can't execute rm command"
+        endif
+    end subroutine addrpl_cmplx_dbl_mtx
+    
+    subroutine addrpl_dbl_vec(zipfile, var_name, vec)
+        implicit none
+        real(8), intent(in)           :: vec(:)
+        character(len=*), intent(in)     :: zipfile, var_name
+        character(len=:), allocatable    :: npy_name
+        integer                          :: succ
+
+        npy_name =  var_name // ".npy"
+
+        call save_npy(npy_name, vec)
+        ! just store and be quite while zipping
+        call execute_command_line("zip -0q " // zipfile &
+                                 // " " // npy_name, cmdstat=succ)
+        if(succ /=  0) then
+            write (*,*) "Can't execute zip command"
+        endif
+
+        call execute_command_line("rm " // npy_name, cmdstat=succ)
+        if(succ /=  0) then
+            write (*,*) "Can't execute rm command"
+        endif
+    end subroutine addrpl_dbl_vec
+    
+    subroutine addrpl_dbl_mtx(zipfile, var_name, mtx)
+        implicit none
+        real(8), intent(in)           :: mtx(:,:)
+        character(len=*), intent(in)     :: zipfile, var_name
+        character(len=:), allocatable    :: npy_name
+        integer                          :: succ
+
+        npy_name =  var_name // ".npy"
+
+        call save_npy(npy_name, mtx)
+        ! just store and be quite while zipping
+        call execute_command_line("zip -0q " // zipfile &
+                                 // " " // npy_name, cmdstat=succ)
+        if(succ /=  0) then
+            write (*,*) "Can't execute zip command"
+        endif
+
+        call execute_command_line("rm " // npy_name, cmdstat=succ)
+        if(succ /=  0) then
+            write (*,*) "Can't execute rm command"
+        endif
+    end subroutine addrpl_dbl_mtx
+    
+    subroutine addrpl_sng_vec(zipfile, var_name, vec)
+        implicit none
+        real(4), intent(in)           :: vec(:)
+        character(len=*), intent(in)     :: zipfile, var_name
+        character(len=:), allocatable    :: npy_name
+        integer                          :: succ
+
+        npy_name =  var_name // ".npy"
+
+        call save_npy(npy_name, vec)
+        ! just store and be quite while zipping
+        call execute_command_line("zip -0q " // zipfile &
+                                 // " " // npy_name, cmdstat=succ)
+        if(succ /=  0) then
+            write (*,*) "Can't execute zip command"
+        endif
+
+        call execute_command_line("rm " // npy_name, cmdstat=succ)
+        if(succ /=  0) then
+            write (*,*) "Can't execute rm command"
+        endif
+    end subroutine addrpl_sng_vec
+    
+    subroutine addrpl_sng_mtx(zipfile, var_name, mtx)
+        implicit none
+        real(4), intent(in)           :: mtx(:,:)
+        character(len=*), intent(in)     :: zipfile, var_name
+        character(len=:), allocatable    :: npy_name
+        integer                          :: succ
+
+        npy_name =  var_name // ".npy"
+
+        call save_npy(npy_name, mtx)
+        ! just store and be quite while zipping
+        call execute_command_line("zip -0q " // zipfile &
+                                 // " " // npy_name, cmdstat=succ)
+        if(succ /=  0) then
+            write (*,*) "Can't execute zip command"
+        endif
+
+        call execute_command_line("rm " // npy_name, cmdstat=succ)
+        if(succ /=  0) then
+            write (*,*) "Can't execute rm command"
+        endif
+    end subroutine addrpl_sng_mtx
+    
+    subroutine addrpl_int8_vec(zipfile, var_name, vec)
+        implicit none
+        integer(1), intent(in)           :: vec(:)
+        character(len=*), intent(in)     :: zipfile, var_name
+        character(len=:), allocatable    :: npy_name
+        integer                          :: succ
+
+        npy_name =  var_name // ".npy"
+
+        call save_npy(npy_name, vec)
+        ! just store and be quite while zipping
+        call execute_command_line("zip -0q " // zipfile &
+                                 // " " // npy_name, cmdstat=succ)
+        if(succ /=  0) then
+            write (*,*) "Can't execute zip command"
+        endif
+
+        call execute_command_line("rm " // npy_name, cmdstat=succ)
+        if(succ /=  0) then
+            write (*,*) "Can't execute rm command"
+        endif
+    end subroutine addrpl_int8_vec
+    
+    subroutine addrpl_int8_mtx(zipfile, var_name, mtx)
+        implicit none
+        integer(1), intent(in)           :: mtx(:,:)
+        character(len=*), intent(in)     :: zipfile, var_name
+        character(len=:), allocatable    :: npy_name
+        integer                          :: succ
+
+        npy_name =  var_name // ".npy"
+
+        call save_npy(npy_name, mtx)
+        ! just store and be quite while zipping
+        call execute_command_line("zip -0q " // zipfile &
+                                 // " " // npy_name, cmdstat=succ)
+        if(succ /=  0) then
+            write (*,*) "Can't execute zip command"
+        endif
+
+        call execute_command_line("rm " // npy_name, cmdstat=succ)
+        if(succ /=  0) then
+            write (*,*) "Can't execute rm command"
+        endif
+    end subroutine addrpl_int8_mtx
+    
+    subroutine addrpl_int16_vec(zipfile, var_name, vec)
+        implicit none
+        integer(2), intent(in)           :: vec(:)
+        character(len=*), intent(in)     :: zipfile, var_name
+        character(len=:), allocatable    :: npy_name
+        integer                          :: succ
+
+        npy_name =  var_name // ".npy"
+
+        call save_npy(npy_name, vec)
+        ! just store and be quite while zipping
+        call execute_command_line("zip -0q " // zipfile &
+                                 // " " // npy_name, cmdstat=succ)
+        if(succ /=  0) then
+            write (*,*) "Can't execute zip command"
+        endif
+
+        call execute_command_line("rm " // npy_name, cmdstat=succ)
+        if(succ /=  0) then
+            write (*,*) "Can't execute rm command"
+        endif
+    end subroutine addrpl_int16_vec
+    
+    subroutine addrpl_int16_mtx(zipfile, var_name, mtx)
+        implicit none
+        integer(2), intent(in)           :: mtx(:,:)
+        character(len=*), intent(in)     :: zipfile, var_name
+        character(len=:), allocatable    :: npy_name
+        integer                          :: succ
+
+        npy_name =  var_name // ".npy"
+
+        call save_npy(npy_name, mtx)
+        ! just store and be quite while zipping
+        call execute_command_line("zip -0q " // zipfile &
+                                 // " " // npy_name, cmdstat=succ)
+        if(succ /=  0) then
+            write (*,*) "Can't execute zip command"
+        endif
+
+        call execute_command_line("rm " // npy_name, cmdstat=succ)
+        if(succ /=  0) then
+            write (*,*) "Can't execute rm command"
+        endif
+    end subroutine addrpl_int16_mtx
+    
+    subroutine addrpl_int32_vec(zipfile, var_name, vec)
+        implicit none
+        integer(4), intent(in)           :: vec(:)
+        character(len=*), intent(in)     :: zipfile, var_name
+        character(len=:), allocatable    :: npy_name
+        integer                          :: succ
+
+        npy_name =  var_name // ".npy"
+
+        call save_npy(npy_name, vec)
+        ! just store and be quite while zipping
+        call execute_command_line("zip -0q " // zipfile &
+                                 // " " // npy_name, cmdstat=succ)
+        if(succ /=  0) then
+            write (*,*) "Can't execute zip command"
+        endif
+
+        call execute_command_line("rm " // npy_name, cmdstat=succ)
+        if(succ /=  0) then
+            write (*,*) "Can't execute rm command"
+        endif
+    end subroutine addrpl_int32_vec
+    
+    subroutine addrpl_int32_mtx(zipfile, var_name, mtx)
+        implicit none
+        integer(4), intent(in)           :: mtx(:,:)
+        character(len=*), intent(in)     :: zipfile, var_name
+        character(len=:), allocatable    :: npy_name
+        integer                          :: succ
+
+        npy_name =  var_name // ".npy"
+
+        call save_npy(npy_name, mtx)
+        ! just store and be quite while zipping
+        call execute_command_line("zip -0q " // zipfile &
+                                 // " " // npy_name, cmdstat=succ)
+        if(succ /=  0) then
+            write (*,*) "Can't execute zip command"
+        endif
+
+        call execute_command_line("rm " // npy_name, cmdstat=succ)
+        if(succ /=  0) then
+            write (*,*) "Can't execute rm command"
+        endif
+    end subroutine addrpl_int32_mtx
+    
+    subroutine addrpl_int64_vec(zipfile, var_name, vec)
+        implicit none
+        integer(8), intent(in)           :: vec(:)
+        character(len=*), intent(in)     :: zipfile, var_name
+        character(len=:), allocatable    :: npy_name
+        integer                          :: succ
+
+        npy_name =  var_name // ".npy"
+
+        call save_npy(npy_name, vec)
+        ! just store and be quite while zipping
+        call execute_command_line("zip -0q " // zipfile &
+                                 // " " // npy_name, cmdstat=succ)
+        if(succ /=  0) then
+            write (*,*) "Can't execute zip command"
+        endif
+
+        call execute_command_line("rm " // npy_name, cmdstat=succ)
+        if(succ /=  0) then
+            write (*,*) "Can't execute rm command"
+        endif
+    end subroutine addrpl_int64_vec
+    
+    subroutine addrpl_int64_mtx(zipfile, var_name, mtx)
+        implicit none
+        integer(8), intent(in)           :: mtx(:,:)
+        character(len=*), intent(in)     :: zipfile, var_name
+        character(len=:), allocatable    :: npy_name
+        integer                          :: succ
+
+        npy_name =  var_name // ".npy"
+
+        call save_npy(npy_name, mtx)
+        ! just store and be quite while zipping
+        call execute_command_line("zip -0q " // zipfile &
+                                 // " " // npy_name, cmdstat=succ)
+        if(succ /=  0) then
+            write (*,*) "Can't execute zip command"
+        endif
+
+        call execute_command_line("rm " // npy_name, cmdstat=succ)
+        if(succ /=  0) then
+            write (*,*) "Can't execute rm command"
+        endif
+    end subroutine addrpl_int64_mtx
+
+    Subroutine write_cmplx_sgn_mtx(filename, mtx)
         Implicit None
         character(len=*), intent(in)     :: filename
         complex(4), intent(in)           :: mtx(:,:)
