@@ -36,7 +36,7 @@ command for which ifort needs the the IFPORT library:
 #endif
 ```
 
-Intel users need to add the flag:
+Therefore, Intel users need to add the flag:
 ```
 -DINTEL_COMPILER_USED
 ```
