@@ -7,8 +7,8 @@ file(GLOB_RECURSE sources  src/*.f90
 add_executable(npy.x ${sources})
 
 enable_language(Fortran)
-#set(CMAKE_Fortran_COMPILER ifort)
-#set(CMAKE_Fortran_COMPILER_ID "Intel")
+set(CMAKE_Fortran_COMPILER ifort)
+set(CMAKE_Fortran_COMPILER_ID "Intel")
 
 
 if(CMAKE_Fortran_COMPILER_ID MATCHES "GNU")

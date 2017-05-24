@@ -1,4 +1,5 @@
-module  m_npy  
+module  m_npy 
+    USE IFPORT
     implicit none
 
     integer(4), parameter               :: p_un      = 23
@@ -42,13 +43,13 @@ contains
 
         call save_npy(npy_name, vec)
         ! just store and be quite while zipping
-        call execute_command_line("zip -0q " // zipfile &
-                                 // " " // npy_name, cmdstat=succ)
+        succ = system("zip -0q " // zipfile &
+                                 // " " // npy_name)
         if(succ /=  0) then
             write (*,*) "Can't execute zip command"
         endif
 
-        call execute_command_line("rm " // npy_name, cmdstat=succ)
+        succ = system("rm " // npy_name)
         if(succ /=  0) then
             write (*,*) "Can't execute rm command"
         endif
@@ -65,13 +66,13 @@ contains
 
         call save_npy(npy_name, mtx)
         ! just store and be quite while zipping
-        call execute_command_line("zip -0q " // zipfile &
-                                 // " " // npy_name, cmdstat=succ)
+        succ = system("zip -0q " // zipfile &
+                                 // " " // npy_name)
         if(succ /=  0) then
             write (*,*) "Can't execute zip command"
         endif
 
-        call execute_command_line("rm " // npy_name, cmdstat=succ)
+        succ = system("rm " // npy_name)
         if(succ /=  0) then
             write (*,*) "Can't execute rm command"
         endif
@@ -88,13 +89,13 @@ contains
 
         call save_npy(npy_name, vec)
         ! just store and be quite while zipping
-        call execute_command_line("zip -0q " // zipfile &
-                                 // " " // npy_name, cmdstat=succ)
+        succ = system("zip -0q " // zipfile &
+                                 // " " // npy_name)
         if(succ /=  0) then
             write (*,*) "Can't execute zip command"
         endif
 
-        call execute_command_line("rm " // npy_name, cmdstat=succ)
+        succ = system("rm " // npy_name)
         if(succ /=  0) then
             write (*,*) "Can't execute rm command"
         endif
@@ -111,13 +112,13 @@ contains
 
         call save_npy(npy_name, mtx)
         ! just store and be quite while zipping
-        call execute_command_line("zip -0q " // zipfile &
-                                 // " " // npy_name, cmdstat=succ)
+        succ = system("zip -0q " // zipfile &
+                                 // " " // npy_name)
         if(succ /=  0) then
             write (*,*) "Can't execute zip command"
         endif
 
-        call execute_command_line("rm " // npy_name, cmdstat=succ)
+        succ = system("rm " // npy_name)
         if(succ /=  0) then
             write (*,*) "Can't execute rm command"
         endif
@@ -134,13 +135,13 @@ contains
 
         call save_npy(npy_name, vec)
         ! just store and be quite while zipping
-        call execute_command_line("zip -0q " // zipfile &
-                                 // " " // npy_name, cmdstat=succ)
+        succ = system("zip -0q " // zipfile &
+                                 // " " // npy_name)
         if(succ /=  0) then
             write (*,*) "Can't execute zip command"
         endif
 
-        call execute_command_line("rm " // npy_name, cmdstat=succ)
+        succ = system("rm " // npy_name)
         if(succ /=  0) then
             write (*,*) "Can't execute rm command"
         endif
@@ -157,13 +158,13 @@ contains
 
         call save_npy(npy_name, mtx)
         ! just store and be quite while zipping
-        call execute_command_line("zip -0q " // zipfile &
-                                 // " " // npy_name, cmdstat=succ)
+        succ = system("zip -0q " // zipfile &
+                                 // " " // npy_name)
         if(succ /=  0) then
             write (*,*) "Can't execute zip command"
         endif
 
-        call execute_command_line("rm " // npy_name, cmdstat=succ)
+        succ = system("rm " // npy_name)
         if(succ /=  0) then
             write (*,*) "Can't execute rm command"
         endif
@@ -180,13 +181,13 @@ contains
 
         call save_npy(npy_name, vec)
         ! just store and be quite while zipping
-        call execute_command_line("zip -0q " // zipfile &
-                                 // " " // npy_name, cmdstat=succ)
+        succ = system("zip -0q " // zipfile &
+                                 // " " // npy_name)
         if(succ /=  0) then
             write (*,*) "Can't execute zip command"
         endif
 
-        call execute_command_line("rm " // npy_name, cmdstat=succ)
+        succ = system("rm " // npy_name)
         if(succ /=  0) then
             write (*,*) "Can't execute rm command"
         endif
@@ -203,13 +204,13 @@ contains
 
         call save_npy(npy_name, mtx)
         ! just store and be quite while zipping
-        call execute_command_line("zip -0q " // zipfile &
-                                 // " " // npy_name, cmdstat=succ)
+        succ = system("zip -0q " // zipfile &
+                                 // " " // npy_name)
         if(succ /=  0) then
             write (*,*) "Can't execute zip command"
         endif
 
-        call execute_command_line("rm " // npy_name, cmdstat=succ)
+        succ = system("rm " // npy_name)
         if(succ /=  0) then
             write (*,*) "Can't execute rm command"
         endif
@@ -226,13 +227,13 @@ contains
 
         call save_npy(npy_name, vec)
         ! just store and be quite while zipping
-        call execute_command_line("zip -0q " // zipfile &
-                                 // " " // npy_name, cmdstat=succ)
+        succ = system("zip -0q " // zipfile &
+                                 // " " // npy_name)
         if(succ /=  0) then
             write (*,*) "Can't execute zip command"
         endif
 
-        call execute_command_line("rm " // npy_name, cmdstat=succ)
+        succ = system("rm " // npy_name)
         if(succ /=  0) then
             write (*,*) "Can't execute rm command"
         endif
@@ -249,13 +250,13 @@ contains
 
         call save_npy(npy_name, mtx)
         ! just store and be quite while zipping
-        call execute_command_line("zip -0q " // zipfile &
-                                 // " " // npy_name, cmdstat=succ)
+        succ = system("zip -0q " // zipfile &
+                                 // " " // npy_name)
         if(succ /=  0) then
             write (*,*) "Can't execute zip command"
         endif
 
-        call execute_command_line("rm " // npy_name, cmdstat=succ)
+        succ = system("rm " // npy_name)
         if(succ /=  0) then
             write (*,*) "Can't execute rm command"
         endif
@@ -272,13 +273,13 @@ contains
 
         call save_npy(npy_name, vec)
         ! just store and be quite while zipping
-        call execute_command_line("zip -0q " // zipfile &
-                                 // " " // npy_name, cmdstat=succ)
+        succ = system("zip -0q " // zipfile &
+                                 // " " // npy_name)
         if(succ /=  0) then
             write (*,*) "Can't execute zip command"
         endif
 
-        call execute_command_line("rm " // npy_name, cmdstat=succ)
+        succ = system("rm " // npy_name)
         if(succ /=  0) then
             write (*,*) "Can't execute rm command"
         endif
@@ -295,13 +296,13 @@ contains
 
         call save_npy(npy_name, mtx)
         ! just store and be quite while zipping
-        call execute_command_line("zip -0q " // zipfile &
-                                 // " " // npy_name, cmdstat=succ)
+        succ = system("zip -0q " // zipfile &
+                                 // " " // npy_name)
         if(succ /=  0) then
             write (*,*) "Can't execute zip command"
         endif
 
-        call execute_command_line("rm " // npy_name, cmdstat=succ)
+        succ = system("rm " // npy_name)
         if(succ /=  0) then
             write (*,*) "Can't execute rm command"
         endif
@@ -318,13 +319,13 @@ contains
 
         call save_npy(npy_name, vec)
         ! just store and be quite while zipping
-        call execute_command_line("zip -0q " // zipfile &
-                                 // " " // npy_name, cmdstat=succ)
+        succ = system("zip -0q " // zipfile &
+                                 // " " // npy_name)
         if(succ /=  0) then
             write (*,*) "Can't execute zip command"
         endif
 
-        call execute_command_line("rm " // npy_name, cmdstat=succ)
+        succ = system("rm " // npy_name)
         if(succ /=  0) then
             write (*,*) "Can't execute rm command"
         endif
@@ -341,13 +342,13 @@ contains
 
         call save_npy(npy_name, mtx)
         ! just store and be quite while zipping
-        call execute_command_line("zip -0q " // zipfile &
-                                 // " " // npy_name, cmdstat=succ)
+        succ = system("zip -0q " // zipfile &
+                                 // " " // npy_name)
         if(succ /=  0) then
             write (*,*) "Can't execute zip command"
         endif
 
-        call execute_command_line("rm " // npy_name, cmdstat=succ)
+        succ = system("rm " // npy_name)
         if(succ /=  0) then
             write (*,*) "Can't execute rm command"
         endif
@@ -364,13 +365,13 @@ contains
 
         call save_npy(npy_name, vec)
         ! just store and be quite while zipping
-        call execute_command_line("zip -0q " // zipfile &
-                                 // " " // npy_name, cmdstat=succ)
+        succ = system("zip -0q " // zipfile &
+                                 // " " // npy_name)
         if(succ /=  0) then
             write (*,*) "Can't execute zip command"
         endif
 
-        call execute_command_line("rm " // npy_name, cmdstat=succ)
+        succ = system("rm " // npy_name)
         if(succ /=  0) then
             write (*,*) "Can't execute rm command"
         endif
@@ -387,13 +388,13 @@ contains
 
         call save_npy(npy_name, mtx)
         ! just store and be quite while zipping
-        call execute_command_line("zip -0q " // zipfile &
-                                 // " " // npy_name, cmdstat=succ)
+        succ = system("zip -0q " // zipfile &
+                                 // " " // npy_name)
         if(succ /=  0) then
             write (*,*) "Can't execute zip command"
         endif
 
-        call execute_command_line("rm " // npy_name, cmdstat=succ)
+        succ = system("rm " // npy_name)
         if(succ /=  0) then
             write (*,*) "Can't execute rm command"
         endif
