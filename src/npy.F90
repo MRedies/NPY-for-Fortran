@@ -1,5 +1,7 @@
-module  m_npy 
+module  m_npy
+#ifdef INTEL_COMPILER_USED
     USE IFPORT
+#endif
     implicit none
 
     integer(4), parameter               :: p_un      = 23
