@@ -8,7 +8,7 @@ module  m_npy
     character, parameter                :: magic_num = achar(147) ! x93
     character, parameter                :: major     = achar(2)   !major *.npy version 
     character, parameter                :: minor     = achar(0)   !minor *.npy version
-    
+    character(len=*), parameter         :: zip_flag  = "-q0"      
     character(len=*), parameter         :: magic_str =  "NUMPY"
 
     interface save_npy
@@ -45,7 +45,7 @@ contains
 
         call save_npy(npy_name, vec)
         ! just store and be quite while zipping
-        succ = system("zip -0q " // zipfile &
+        succ = system("zip " // zip_flag // " " // zipfile &
                                  // " " // npy_name)
         if(succ /=  0) then
             write (*,*) "Can't execute zip command"
@@ -68,7 +68,7 @@ contains
 
         call save_npy(npy_name, mtx)
         ! just store and be quite while zipping
-        succ = system("zip -0q " // zipfile &
+        succ = system("zip " // zip_flag // " " // zipfile &
                                  // " " // npy_name)
         if(succ /=  0) then
             write (*,*) "Can't execute zip command"
@@ -91,7 +91,7 @@ contains
 
         call save_npy(npy_name, vec)
         ! just store and be quite while zipping
-        succ = system("zip -0q " // zipfile &
+        succ = system("zip " // zip_flag // " " // zipfile &
                                  // " " // npy_name)
         if(succ /=  0) then
             write (*,*) "Can't execute zip command"
@@ -114,7 +114,7 @@ contains
 
         call save_npy(npy_name, mtx)
         ! just store and be quite while zipping
-        succ = system("zip -0q " // zipfile &
+        succ = system("zip " // zip_flag // " " // zipfile &
                                  // " " // npy_name)
         if(succ /=  0) then
             write (*,*) "Can't execute zip command"
@@ -137,7 +137,7 @@ contains
 
         call save_npy(npy_name, vec)
         ! just store and be quite while zipping
-        succ = system("zip -0q " // zipfile &
+        succ = system("zip " // zip_flag // " " // zipfile &
                                  // " " // npy_name)
         if(succ /=  0) then
             write (*,*) "Can't execute zip command"
@@ -160,7 +160,7 @@ contains
 
         call save_npy(npy_name, mtx)
         ! just store and be quite while zipping
-        succ = system("zip -0q " // zipfile &
+        succ = system("zip " // zip_flag // " " // zipfile &
                                  // " " // npy_name)
         if(succ /=  0) then
             write (*,*) "Can't execute zip command"
@@ -183,7 +183,7 @@ contains
 
         call save_npy(npy_name, vec)
         ! just store and be quite while zipping
-        succ = system("zip -0q " // zipfile &
+        succ = system("zip " // zip_flag // " " // zipfile &
                                  // " " // npy_name)
         if(succ /=  0) then
             write (*,*) "Can't execute zip command"
@@ -206,7 +206,7 @@ contains
 
         call save_npy(npy_name, mtx)
         ! just store and be quite while zipping
-        succ = system("zip -0q " // zipfile &
+        succ = system("zip " // zip_flag // " " // zipfile &
                                  // " " // npy_name)
         if(succ /=  0) then
             write (*,*) "Can't execute zip command"
@@ -229,7 +229,7 @@ contains
 
         call save_npy(npy_name, vec)
         ! just store and be quite while zipping
-        succ = system("zip -0q " // zipfile &
+        succ = system("zip " // zip_flag // " " // zipfile &
                                  // " " // npy_name)
         if(succ /=  0) then
             write (*,*) "Can't execute zip command"
@@ -252,7 +252,7 @@ contains
 
         call save_npy(npy_name, mtx)
         ! just store and be quite while zipping
-        succ = system("zip -0q " // zipfile &
+        succ = system("zip " // zip_flag // " " // zipfile &
                                  // " " // npy_name)
         if(succ /=  0) then
             write (*,*) "Can't execute zip command"
@@ -275,7 +275,7 @@ contains
 
         call save_npy(npy_name, vec)
         ! just store and be quite while zipping
-        succ = system("zip -0q " // zipfile &
+        succ = system("zip " // zip_flag // " " // zipfile &
                                  // " " // npy_name)
         if(succ /=  0) then
             write (*,*) "Can't execute zip command"
@@ -298,7 +298,7 @@ contains
 
         call save_npy(npy_name, mtx)
         ! just store and be quite while zipping
-        succ = system("zip -0q " // zipfile &
+        succ = system("zip " // zip_flag // " " // zipfile &
                                  // " " // npy_name)
         if(succ /=  0) then
             write (*,*) "Can't execute zip command"
@@ -321,7 +321,7 @@ contains
 
         call save_npy(npy_name, vec)
         ! just store and be quite while zipping
-        succ = system("zip -0q " // zipfile &
+        succ = system("zip " // zip_flag // " " // zipfile &
                                  // " " // npy_name)
         if(succ /=  0) then
             write (*,*) "Can't execute zip command"
@@ -344,7 +344,7 @@ contains
 
         call save_npy(npy_name, mtx)
         ! just store and be quite while zipping
-        succ = system("zip -0q " // zipfile &
+        succ = system("zip " // zip_flag // " " // zipfile &
                                  // " " // npy_name)
         if(succ /=  0) then
             write (*,*) "Can't execute zip command"
@@ -367,7 +367,7 @@ contains
 
         call save_npy(npy_name, vec)
         ! just store and be quite while zipping
-        succ = system("zip -0q " // zipfile &
+        succ = system("zip " // zip_flag // " " // zipfile &
                                  // " " // npy_name)
         if(succ /=  0) then
             write (*,*) "Can't execute zip command"
@@ -390,7 +390,7 @@ contains
 
         call save_npy(npy_name, mtx)
         ! just store and be quite while zipping
-        succ = system("zip -0q " // zipfile &
+        succ = system("zip " // zip_flag // " " // zipfile &
                                  // " " // npy_name)
         if(succ /=  0) then
             write (*,*) "Can't execute zip command"
