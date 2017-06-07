@@ -50,3 +50,18 @@ but instead can (not must) use the equivalent
 ```
 -std=gnu
 ```
+### Control Flags
+
+In the source file the parameter
+
+```fortran
+    character(len=*), parameter         :: zip_flag  = "-q0"  
+```
+
+can be used to control the compression. "-q0" tells the zip tool to have no output and no compression. The parameter 
+
+```fortran
+    character(len=*), parameter         :: endianess = 'LITTLE_ENDIAN'
+```
+
+sets the [endianess](https://en.wikipedia.org/wiki/Endianness) of the output. Most personal computers use little endian.
