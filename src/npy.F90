@@ -8,8 +8,9 @@ module  m_npy
     character, parameter                :: magic_num = achar(147) ! x93
     character, parameter                :: major     = achar(2)   !major *.npy version 
     character, parameter                :: minor     = achar(0)   !minor *.npy version
-    character(len=*), parameter         :: zip_flag  = "-q0"      
-    character(len=*), parameter         :: magic_str =  "NUMPY"
+    character(len=*), parameter         :: zip_flag  = "-q0"  
+    character(len=*), parameter         :: endianess = 'LITTLE_ENDIAN'
+    character(len=*), parameter         :: magic_str = "NUMPY"
 
     interface save_npy
         module procedure write_int64_vec,     write_int64_mtx, &
@@ -412,7 +413,8 @@ contains
         s_mtx = shape(mtx)
         header_len =  len(dict_str(var_type, s_mtx))
         
-        open(unit=p_un, file=filename, form="unformatted",access="stream")
+        open(unit=p_un, file=filename, form="unformatted",&
+             convert=endianess,access="stream")
         write (p_un) magic_num, magic_str, major, minor
         write (p_un) header_len
         write (p_un) dict_str(var_type, s_mtx)
@@ -430,7 +432,8 @@ contains
         s_vec = shape(vec)
         header_len =  len(dict_str(var_type, s_vec))
         
-        open(unit=p_un, file=filename, form="unformatted",access="stream")
+        open(unit=p_un, file=filename, form="unformatted",&
+             convert=endianess,access="stream")
         write (p_un) magic_num, magic_str, major, minor
         write (p_un) header_len
         write (p_un) dict_str(var_type, s_vec)
@@ -448,7 +451,8 @@ contains
         s_mtx = shape(mtx)
         header_len =  len(dict_str(var_type, s_mtx))
         
-        open(unit=p_un, file=filename, form="unformatted",access="stream")
+        open(unit=p_un, file=filename, form="unformatted",&
+             convert=endianess,access="stream")
         write (p_un) magic_num, magic_str, major, minor
         write (p_un) header_len
         write (p_un) dict_str(var_type, s_mtx)
@@ -466,7 +470,8 @@ contains
         s_vec = shape(vec)
         header_len =  len(dict_str(var_type, s_vec))
         
-        open(unit=p_un, file=filename, form="unformatted",access="stream")
+        open(unit=p_un, file=filename, form="unformatted",&
+             convert=endianess,access="stream")
         write (p_un) magic_num, magic_str, major, minor
         write (p_un) header_len
         write (p_un) dict_str(var_type, s_vec)
@@ -484,7 +489,8 @@ contains
         s_mtx = shape(mtx)
         header_len =  len(dict_str(var_type, s_mtx))
         
-        open(unit=p_un, file=filename, form="unformatted",access="stream")
+        open(unit=p_un, file=filename, form="unformatted",&
+             convert=endianess,access="stream")
         write (p_un) magic_num, magic_str, major, minor
         write (p_un) header_len
         write (p_un) dict_str(var_type, s_mtx)
@@ -502,7 +508,8 @@ contains
         s_vec = shape(vec)
         header_len =  len(dict_str(var_type, s_vec))
         
-        open(unit=p_un, file=filename, form="unformatted",access="stream")
+        open(unit=p_un, file=filename, form="unformatted",&
+             convert=endianess,access="stream")
         write (p_un) magic_num, magic_str, major, minor
         write (p_un) header_len
         write (p_un) dict_str(var_type, s_vec)
@@ -520,7 +527,8 @@ contains
         s_mtx = shape(mtx)
         header_len =  len(dict_str(var_type, s_mtx))
         
-        open(unit=p_un, file=filename, form="unformatted",access="stream")
+        open(unit=p_un, file=filename, form="unformatted",&
+             convert=endianess,access="stream")
         write (p_un) magic_num, magic_str, major, minor
         write (p_un) header_len
         write (p_un) dict_str(var_type, s_mtx)
@@ -538,7 +546,8 @@ contains
         s_vec = shape(vec)
         header_len =  len(dict_str(var_type, s_vec))
         
-        open(unit=p_un, file=filename, form="unformatted",access="stream")
+        open(unit=p_un, file=filename, form="unformatted",&
+             convert=endianess,access="stream")
         write (p_un) magic_num, magic_str, major, minor
         write (p_un) header_len
         write (p_un) dict_str(var_type, s_vec)
@@ -556,7 +565,8 @@ contains
         s_mtx = shape(mtx)
         header_len =  len(dict_str(var_type, s_mtx))
         
-        open(unit=p_un, file=filename, form="unformatted",access="stream")
+        open(unit=p_un, file=filename, form="unformatted",&
+             convert=endianess,access="stream")
         write (p_un) magic_num, magic_str, major, minor
         write (p_un) header_len
         write (p_un) dict_str(var_type, s_mtx)
@@ -574,7 +584,8 @@ contains
         s_vec = shape(vec)
         header_len =  len(dict_str(var_type, s_vec))
         
-        open(unit=p_un, file=filename, form="unformatted",access="stream")
+        open(unit=p_un, file=filename, form="unformatted",&
+             convert=endianess,access="stream")
         write (p_un) magic_num, magic_str, major, minor
         write (p_un) header_len
         write (p_un) dict_str(var_type, s_vec)
@@ -593,7 +604,8 @@ contains
         s_mtx = shape(mtx)
         header_len =  len(dict_str(var_type, s_mtx))
         
-        open(unit=p_un, file=filename, form="unformatted",access="stream")
+        open(unit=p_un, file=filename, form="unformatted",&
+             convert=endianess,access="stream")
         write (p_un) magic_num, magic_str, major, minor
         write (p_un) header_len
         write (p_un) dict_str(var_type, s_mtx)
@@ -611,7 +623,8 @@ contains
         s_vec = shape(vec)
         header_len =  len(dict_str(var_type, s_vec))
         
-        open(unit=p_un, file=filename, form="unformatted",access="stream")
+        open(unit=p_un, file=filename, form="unformatted",&
+             convert=endianess,access="stream")
         write (p_un) magic_num, magic_str, major, minor
         write (p_un) header_len
         write (p_un) dict_str(var_type, s_vec)
@@ -629,7 +642,8 @@ contains
         s_mtx = shape(mtx)
         header_len =  len(dict_str(var_type, s_mtx))
         
-        open(unit=p_un, file=filename, form="unformatted",access="stream")
+        open(unit=p_un, file=filename, form="unformatted",&
+             convert=endianess,access="stream")
         write (p_un) magic_num, magic_str, major, minor
         write (p_un) header_len
         write (p_un) dict_str(var_type, s_mtx)
@@ -647,7 +661,8 @@ contains
         s_vec = shape(vec)
         header_len =  len(dict_str(var_type, s_vec))
         
-        open(unit=p_un, file=filename, form="unformatted",access="stream")
+        open(unit=p_un, file=filename, form="unformatted",&
+             convert=endianess,access="stream")
         write (p_un) magic_num, magic_str, major, minor
         write (p_un) header_len
         write (p_un) dict_str(var_type, s_vec)
@@ -665,7 +680,8 @@ contains
         s_mtx = shape(mtx)
         header_len =  len(dict_str(var_type, s_mtx))
         
-        open(unit=p_un, file=filename, form="unformatted",access="stream")
+        open(unit=p_un, file=filename, form="unformatted",&
+             convert=endianess,access="stream")
         write (p_un) magic_num, magic_str, major, minor
         write (p_un) header_len
         write (p_un) dict_str(var_type, s_mtx)
@@ -683,7 +699,8 @@ contains
         s_vec = shape(vec)
         header_len =  len(dict_str(var_type, s_vec))
         
-        open(unit=p_un, file=filename, form="unformatted",access="stream")
+        open(unit=p_un, file=filename, form="unformatted",&
+             convert=endianess,access="stream")
         write (p_un) magic_num, magic_str, major, minor
         write (p_un) header_len
         write (p_un) dict_str(var_type, s_vec)
