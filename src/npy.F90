@@ -32,24 +32,32 @@ module  m_npy
     end interface add_npz
 
 contains
+    subroutine run_sys(cmd, stat)
+        implicit none
+        character(len=*), intent(in)     :: cmd
+        integer(4), intent(out)          :: stat
+        
+        call execute_command_line(cmd, wait=.True., exitstat=stat)
+    end subroutine run_sys
+    
     subroutine addrpl_cmplx_sng_vec(zipfile, var_name, vec)
         implicit none
         complex(4), intent(in)           :: vec(:)
         character(len=*), intent(in)     :: zipfile, var_name
         character(len=:), allocatable    :: npy_name
-        integer                          :: succ
+        integer(4)                       :: succ
 
         npy_name =  var_name // ".npy"
 
         call save_npy(npy_name, vec)
         ! just store and be quite while zipping
-        call system("zip " // zip_flag // " " // zipfile &
+        call run_sys("zip " // zip_flag // " " // zipfile &
                                  // " " // npy_name, succ)
         if(succ /=  0) then
             write (*,*) "Can't execute zip command"
         endif
 
-        call system("rm " // npy_name, succ)
+        call run_sys("rm " // npy_name, succ)
         if(succ /=  0) then
             write (*,*) "Can't execute rm command"
         endif
@@ -60,19 +68,19 @@ contains
         complex(4), intent(in)           :: mtx(:,:)
         character(len=*), intent(in)     :: zipfile, var_name
         character(len=:), allocatable    :: npy_name
-        integer                          :: succ
+        integer(4)                       :: succ
 
         npy_name =  var_name // ".npy"
 
         call save_npy(npy_name, mtx)
         ! just store and be quite while zipping
-        call system("zip " // zip_flag // " " // zipfile &
+        call run_sys("zip " // zip_flag // " " // zipfile &
                                  // " " // npy_name, succ)
         if(succ /=  0) then
             write (*,*) "Can't execute zip command"
         endif
 
-        call system("rm " // npy_name, succ)
+        call run_sys("rm " // npy_name, succ)
         if(succ /=  0) then
             write (*,*) "Can't execute rm command"
         endif
@@ -83,19 +91,19 @@ contains
         complex(8), intent(in)           :: vec(:)
         character(len=*), intent(in)     :: zipfile, var_name
         character(len=:), allocatable    :: npy_name
-        integer                          :: succ
+        integer(4)                       :: succ
 
         npy_name =  var_name // ".npy"
 
         call save_npy(npy_name, vec)
         ! just store and be quite while zipping
-        call system("zip " // zip_flag // " " // zipfile &
+        call run_sys("zip " // zip_flag // " " // zipfile &
                                  // " " // npy_name, succ)
         if(succ /=  0) then
             write (*,*) "Can't execute zip command"
         endif
 
-        call system("rm " // npy_name, succ)
+        call run_sys("rm " // npy_name, succ)
         if(succ /=  0) then
             write (*,*) "Can't execute rm command"
         endif
@@ -106,19 +114,19 @@ contains
         complex(8), intent(in)           :: mtx(:,:)
         character(len=*), intent(in)     :: zipfile, var_name
         character(len=:), allocatable    :: npy_name
-        integer                          :: succ
+        integer(4)                       :: succ
 
         npy_name =  var_name // ".npy"
 
         call save_npy(npy_name, mtx)
         ! just store and be quite while zipping
-        call system("zip " // zip_flag // " " // zipfile &
+        call run_sys("zip " // zip_flag // " " // zipfile &
                                  // " " // npy_name, succ)
         if(succ /=  0) then
             write (*,*) "Can't execute zip command"
         endif
 
-        call system("rm " // npy_name, succ)
+        call run_sys("rm " // npy_name, succ)
         if(succ /=  0) then
             write (*,*) "Can't execute rm command"
         endif
@@ -129,19 +137,19 @@ contains
         real(8), intent(in)           :: vec(:)
         character(len=*), intent(in)     :: zipfile, var_name
         character(len=:), allocatable    :: npy_name
-        integer                          :: succ
+        integer(4)                       :: succ
 
         npy_name =  var_name // ".npy"
 
         call save_npy(npy_name, vec)
         ! just store and be quite while zipping
-        call system("zip " // zip_flag // " " // zipfile &
+        call run_sys("zip " // zip_flag // " " // zipfile &
                                  // " " // npy_name, succ)
         if(succ /=  0) then
             write (*,*) "Can't execute zip command"
         endif
 
-        call system("rm " // npy_name, succ)
+        call run_sys("rm " // npy_name, succ)
         if(succ /=  0) then
             write (*,*) "Can't execute rm command"
         endif
@@ -152,19 +160,19 @@ contains
         real(8), intent(in)           :: mtx(:,:)
         character(len=*), intent(in)     :: zipfile, var_name
         character(len=:), allocatable    :: npy_name
-        integer                          :: succ
+        integer(4)                       :: succ
 
         npy_name =  var_name // ".npy"
 
         call save_npy(npy_name, mtx)
         ! just store and be quite while zipping
-        call system("zip " // zip_flag // " " // zipfile &
+        call run_sys("zip " // zip_flag // " " // zipfile &
                                  // " " // npy_name, succ)
         if(succ /=  0) then
             write (*,*) "Can't execute zip command"
         endif
 
-        call system("rm " // npy_name)
+        call run_sys("rm " // npy_name, succ)
         if(succ /=  0) then
             write (*,*) "Can't execute rm command"
         endif
@@ -175,19 +183,19 @@ contains
         real(4), intent(in)           :: vec(:)
         character(len=*), intent(in)     :: zipfile, var_name
         character(len=:), allocatable    :: npy_name
-        integer                          :: succ
+        integer(4)                       :: succ
 
         npy_name =  var_name // ".npy"
 
         call save_npy(npy_name, vec)
         ! just store and be quite while zipping
-        call system("zip " // zip_flag // " " // zipfile &
+        call run_sys("zip " // zip_flag // " " // zipfile &
                                  // " " // npy_name, succ)
         if(succ /=  0) then
             write (*,*) "Can't execute zip command"
         endif
 
-        call system("rm " // npy_name, succ)
+        call run_sys("rm " // npy_name, succ)
         if(succ /=  0) then
             write (*,*) "Can't execute rm command"
         endif
@@ -198,19 +206,19 @@ contains
         real(4), intent(in)           :: mtx(:,:)
         character(len=*), intent(in)     :: zipfile, var_name
         character(len=:), allocatable    :: npy_name
-        integer                          :: succ
+        integer(4)                       :: succ
 
         npy_name =  var_name // ".npy"
 
         call save_npy(npy_name, mtx)
         ! just store and be quite while zipping
-        call system("zip " // zip_flag // " " // zipfile &
+        call run_sys("zip " // zip_flag // " " // zipfile &
                                  // " " // npy_name, succ)
         if(succ /=  0) then
             write (*,*) "Can't execute zip command"
         endif
 
-        call system("rm " // npy_name, succ)
+        call run_sys("rm " // npy_name, succ)
         if(succ /=  0) then
             write (*,*) "Can't execute rm command"
         endif
@@ -221,19 +229,19 @@ contains
         integer(1), intent(in)           :: vec(:)
         character(len=*), intent(in)     :: zipfile, var_name
         character(len=:), allocatable    :: npy_name
-        integer                          :: succ
+        integer(4)                       :: succ
 
         npy_name =  var_name // ".npy"
 
         call save_npy(npy_name, vec)
         ! just store and be quite while zipping
-        call system("zip " // zip_flag // " " // zipfile &
+        call run_sys("zip " // zip_flag // " " // zipfile &
                                  // " " // npy_name, succ)
         if(succ /=  0) then
             write (*,*) "Can't execute zip command"
         endif
 
-        call system("rm " // npy_name, succ)
+        call run_sys("rm " // npy_name, succ)
         if(succ /=  0) then
             write (*,*) "Can't execute rm command"
         endif
@@ -244,19 +252,19 @@ contains
         integer(1), intent(in)           :: mtx(:,:)
         character(len=*), intent(in)     :: zipfile, var_name
         character(len=:), allocatable    :: npy_name
-        integer                          :: succ
+        integer(4)                       :: succ
 
         npy_name =  var_name // ".npy"
 
         call save_npy(npy_name, mtx)
         ! just store and be quite while zipping
-        call system("zip " // zip_flag // " " // zipfile &
+        call run_sys("zip " // zip_flag // " " // zipfile &
                                  // " " // npy_name, succ)
         if(succ /=  0) then
             write (*,*) "Can't execute zip command"
         endif
 
-        call system("rm " // npy_name, succ)
+        call run_sys("rm " // npy_name, succ)
         if(succ /=  0) then
             write (*,*) "Can't execute rm command"
         endif
@@ -267,19 +275,19 @@ contains
         integer(2), intent(in)           :: vec(:)
         character(len=*), intent(in)     :: zipfile, var_name
         character(len=:), allocatable    :: npy_name
-        integer                          :: succ
+        integer(4)                       :: succ
 
         npy_name =  var_name // ".npy"
 
         call save_npy(npy_name, vec)
         ! just store and be quite while zipping
-        call system("zip " // zip_flag // " " // zipfile &
+        call run_sys("zip " // zip_flag // " " // zipfile &
                                  // " " // npy_name, succ)
         if(succ /=  0) then
             write (*,*) "Can't execute zip command"
         endif
 
-        call system("rm " // npy_name, succ)
+        call run_sys("rm " // npy_name, succ)
         if(succ /=  0) then
             write (*,*) "Can't execute rm command"
         endif
@@ -290,19 +298,19 @@ contains
         integer(2), intent(in)           :: mtx(:,:)
         character(len=*), intent(in)     :: zipfile, var_name
         character(len=:), allocatable    :: npy_name
-        integer                          :: succ
+        integer(4)                       :: succ
 
         npy_name =  var_name // ".npy"
 
         call save_npy(npy_name, mtx)
         ! just store and be quite while zipping
-        call system("zip " // zip_flag // " " // zipfile &
+        call run_sys("zip " // zip_flag // " " // zipfile &
                                  // " " // npy_name, succ)
         if(succ /=  0) then
             write (*,*) "Can't execute zip command"
         endif
 
-        call system("rm " // npy_name, succ)
+        call run_sys("rm " // npy_name, succ)
         if(succ /=  0) then
             write (*,*) "Can't execute rm command"
         endif
@@ -313,19 +321,19 @@ contains
         integer(4), intent(in)           :: vec(:)
         character(len=*), intent(in)     :: zipfile, var_name
         character(len=:), allocatable    :: npy_name
-        integer                          :: succ
+        integer(4)                       :: succ
 
         npy_name =  var_name // ".npy"
 
         call save_npy(npy_name, vec)
         ! just store and be quite while zipping
-        call system("zip " // zip_flag // " " // zipfile &
+        call run_sys("zip " // zip_flag // " " // zipfile &
                                  // " " // npy_name, succ)
         if(succ /=  0) then
             write (*,*) "Can't execute zip command"
         endif
 
-        call system("rm " // npy_name, succ)
+        call run_sys("rm " // npy_name, succ)
         if(succ /=  0) then
             write (*,*) "Can't execute rm command"
         endif
@@ -336,19 +344,19 @@ contains
         integer(4), intent(in)           :: mtx(:,:)
         character(len=*), intent(in)     :: zipfile, var_name
         character(len=:), allocatable    :: npy_name
-        integer                          :: succ
+        integer(4)                       :: succ
 
         npy_name =  var_name // ".npy"
 
         call save_npy(npy_name, mtx)
         ! just store and be quite while zipping
-        call system("zip " // zip_flag // " " // zipfile &
+        call run_sys("zip " // zip_flag // " " // zipfile &
                                  // " " // npy_name, succ)
         if(succ /=  0) then
             write (*,*) "Can't execute zip command"
         endif
 
-        call system("rm " // npy_name, succ)
+        call run_sys("rm " // npy_name, succ)
         if(succ /=  0) then
             write (*,*) "Can't execute rm command"
         endif
@@ -359,19 +367,19 @@ contains
         integer(8), intent(in)           :: vec(:)
         character(len=*), intent(in)     :: zipfile, var_name
         character(len=:), allocatable    :: npy_name
-        integer                          :: succ
+        integer(4)                       :: succ
 
         npy_name =  var_name // ".npy"
 
         call save_npy(npy_name, vec)
         ! just store and be quite while zipping
-        call system("zip " // zip_flag // " " // zipfile &
+        call run_sys("zip " // zip_flag // " " // zipfile &
                                  // " " // npy_name, succ)
         if(succ /=  0) then
             write (*,*) "Can't execute zip command"
         endif
 
-        call system("rm " // npy_name, succ)
+        call run_sys("rm " // npy_name, succ)
         if(succ /=  0) then
             write (*,*) "Can't execute rm command"
         endif
@@ -382,19 +390,19 @@ contains
         integer(8), intent(in)           :: mtx(:,:)
         character(len=*), intent(in)     :: zipfile, var_name
         character(len=:), allocatable    :: npy_name
-        integer                          :: succ
+        integer(4)                       :: succ
 
         npy_name =  var_name // ".npy"
 
         call save_npy(npy_name, mtx)
         ! just store and be quite while zipping
-        call system("zip " // zip_flag // " " // zipfile &
-                                 // " " // npy_name)
+        call run_sys("zip " // zip_flag // " " // zipfile &
+                                 // " " // npy_name, succ)
         if(succ /=  0) then
             write (*,*) "Can't execute zip command"
         endif
 
-        call system("rm " // npy_name)
+        call run_sys("rm " // npy_name, succ)
         if(succ /=  0) then
             write (*,*) "Can't execute rm command"
         endif
