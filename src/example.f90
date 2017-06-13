@@ -2,7 +2,7 @@ program main
     use m_npy
     use endian_swap
 
-    real(8)       :: a(10,20), b(10)
+    complex(8)       :: a(10,20), b(10)
     integer(4)       :: i, j
     real(4)  :: test1
     real(8)  :: test2
@@ -18,7 +18,7 @@ program main
     enddo
 
     
-    call save_npy("mtx.npy", a)
+    !call save_npy("mtx.npy", a)
     call save_npy("vec.npy", b)
     !call add_npz("example.npz", "vec", a)
     !call add_npz("example.npz", "voc", b)

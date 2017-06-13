@@ -418,6 +418,7 @@ contains
 
         s_mtx = shape(mtx)
         header_len =  len(dict_str(var_type, s_mtx))
+        write (*,*) "Warning: write cmplx not supported by XLF"
         
         open(unit=p_un, file=filename, form="unformatted",&
              access="stream")
@@ -447,6 +448,7 @@ contains
 
         s_vec = shape(vec)
         header_len =  len(dict_str(var_type, s_vec))
+        write (*,*) "Warning: write cmplx not supported by XLF"
         
         open(unit=p_un, file=filename, form="unformatted",&
              access="stream")
@@ -478,6 +480,7 @@ contains
 
         s_mtx = shape(mtx)
         header_len =  len(dict_str(var_type, s_mtx))
+        write (*,*) "Warning: write cmplx not supported by XLF"
         
         open(unit=p_un, file=filename, form="unformatted",&
              access="stream")
@@ -506,12 +509,14 @@ contains
         Implicit None
         character(len=*), intent(in)     :: filename
         complex(8), intent(in)           :: vec(:)
+        complex(8)                       :: tmp
         character(len=*), parameter      :: var_type =  "<c16"
         integer(4)                       :: header_len, s_vec(1), i
 
         s_vec = shape(vec)
         header_len =  len(dict_str(var_type, s_vec))
-        
+        write (*,*) "Warning: write cmplx not supported by XLF"
+
         open(unit=p_un, file=filename, form="unformatted",&
              access="stream")
         write (p_un) magic_num, magic_str, major, minor
@@ -542,6 +547,8 @@ contains
 
         s_mtx = shape(mtx)
         header_len =  len(dict_str(var_type, s_mtx))
+    
+        write (*,*) "Warning: write cmplx not supported by XLF"
         
         open(unit=p_un, file=filename, form="unformatted",&
              access="stream")
