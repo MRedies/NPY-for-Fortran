@@ -9,7 +9,7 @@ program main
 
     do i =  1,size(a,1)
         do j =  1,size(a,2)
-            a(i,j) = (0,1)
+            a(i,j) = i * j
         enddo
     enddo
 
@@ -18,7 +18,7 @@ program main
     enddo
 
     
-    call save_npy("mtx.npy", a)
+    !call save_npy("mtx.npy", a)
     call save_npy("vec.npy", b)
     !call add_npz("example.npz", "vec", a)
     !call add_npz("example.npz", "voc", b)
