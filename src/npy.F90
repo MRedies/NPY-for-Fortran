@@ -425,7 +425,7 @@ contains
         write (p_un) header_len
         write (p_un) dict_str(var_type, s_mtx)
 
-        if(use_big_endian == Big_Endian()) then  
+        if(use_big_endian .eqv. Big_Endian()) then  
             write (p_un) mtx
         else
             do j = 1,size(mtx,2)
@@ -459,7 +459,7 @@ contains
 
         write (p_un) dict_str(var_type, s_vec)
         
-        if(use_big_endian == Big_Endian()) then  
+        if(use_big_endian .eqv. Big_Endian()) then  
             write (p_un) vec
         else
             do i =  1,size(vec)
@@ -490,7 +490,7 @@ contains
 
         write (p_un) dict_str(var_type, s_mtx)
         
-        if(use_big_endian == Big_Endian()) then  
+        if(use_big_endian .eqv. Big_Endian()) then  
             write (p_un) mtx
         else
             do j = 1,size(mtx,2)
@@ -523,7 +523,7 @@ contains
 
         write (p_un) dict_str(var_type, s_vec)
         
-        if(use_big_endian == Big_Endian()) then  
+        if(use_big_endian .eqv. Big_Endian()) then  
             write (p_un) vec
         else
             do i =  1,size(vec)
@@ -554,7 +554,7 @@ contains
 
         write (p_un) dict_str(var_type, s_mtx)
         
-        if(use_big_endian == Big_Endian()) then  
+        if(use_big_endian .eqv. Big_Endian()) then  
             write (p_un) mtx
         else
             do j = 1,size(mtx,2)
@@ -587,7 +587,7 @@ contains
 
         write (p_un) dict_str(var_type, s_vec)
         
-        if(use_big_endian == Big_Endian()) then  
+        if(use_big_endian .eqv. Big_Endian()) then  
             write (p_un) vec
         else
             do i =  1,size(vec)
@@ -618,7 +618,7 @@ contains
 
         write (p_un) dict_str(var_type, s_mtx)
         
-        if(use_big_endian == Big_Endian()) then  
+        if(use_big_endian .eqv. Big_Endian()) then  
             write (p_un) mtx
         else
             do j = 1,size(mtx,2)
@@ -651,7 +651,7 @@ contains
 
         write (p_un) dict_str(var_type, s_vec)
         
-        if(use_big_endian == Big_Endian()) then  
+        if(use_big_endian .eqv. Big_Endian()) then  
             write (p_un) vec
         else
             do i =  1,size(vec)
@@ -682,7 +682,7 @@ contains
 
         write (p_un) dict_str(var_type, s_mtx)
         
-        if(use_big_endian == Big_Endian()) then  
+        if(use_big_endian .eqv. Big_Endian()) then  
             write (p_un) mtx
         else
             do j = 1,size(mtx,2)
@@ -715,7 +715,7 @@ contains
 
         write (p_un) dict_str(var_type, s_vec)
         
-        if(use_big_endian == Big_Endian()) then  
+        if(use_big_endian .eqv. Big_Endian()) then  
             write (p_un) vec
         else
             do i =  1,size(vec)
@@ -746,7 +746,7 @@ contains
         endif
         write (p_un) dict_str(var_type, s_mtx)
         
-        if(use_big_endian == Big_Endian()) then  
+        if(use_big_endian .eqv. Big_Endian()) then  
             write (p_un) mtx
         else
             do j = 1,size(mtx,2)
@@ -774,7 +774,7 @@ contains
         write (p_un) header_len
         write (p_un) dict_str(var_type, s_vec)
         
-        if(use_big_endian == Big_Endian()) then  
+        if(use_big_endian .eqv. Big_Endian()) then  
             write (p_un) vec
         else
             do i =  1,size(vec)
@@ -800,7 +800,7 @@ contains
         write (p_un) header_len
         write (p_un) dict_str(var_type, s_mtx)
         
-        if(use_big_endian == Big_Endian()) then  
+        if(use_big_endian .eqv. Big_Endian()) then  
             write (p_un) mtx
         else
             do j = 1,size(mtx,2)
@@ -828,7 +828,7 @@ contains
         write (p_un) header_len
         write (p_un) dict_str(var_type, s_vec)
         
-        if(use_big_endian == Big_Endian()) then  
+        if(use_big_endian .eqv. Big_Endian()) then  
             write (p_un) vec
         else
             do i =  1,size(vec)
@@ -854,7 +854,7 @@ contains
         write (p_un) header_len
         write (p_un) dict_str(var_type, s_mtx)
         
-        if(use_big_endian == Big_Endian()) then  
+        if(use_big_endian .eqv. Big_Endian()) then  
             write (p_un) mtx
         else
             do j = 1,size(mtx,2)
@@ -882,7 +882,7 @@ contains
         write (p_un) header_len
         write (p_un) dict_str(var_type, s_vec)
         
-        if(use_big_endian == Big_Endian()) then  
+        if(use_big_endian .eqv. Big_Endian()) then  
             write (p_un) vec
         else
             do i =  1,size(vec)
