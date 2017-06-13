@@ -2,14 +2,14 @@ program main
     use m_npy
     use endian_swap
 
-    complex(8)       :: a(10,20), b(10)
+    real(8)       :: a(10,20), b(10)
     integer(4)       :: i, j
     real(4)  :: test1
     real(8)  :: test2
 
     do i =  1,size(a,1)
         do j =  1,size(a,2)
-            a(i,j) = (0,1)
+            a(i,j) = i * j
         enddo
     enddo
 
