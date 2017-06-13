@@ -65,3 +65,15 @@ can be used to control the compression. "-q0" tells the zip tool to have no outp
 ```
 
 sets the [endianess](https://en.wikipedia.org/wiki/Endianness) of the output. Most personal computers use little endian.
+
+
+
+### Endianess
+
+Using the flag
+
+```fortran
+    logical, parameter                  :: use_big_endian = .False.
+```
+
+the output [endianess](https://en.wikipedia.org/wiki/Least_significant_bit) can be set. This works independent of the compiler. Little endian (.False.) is a reasonable default for most personal computers.
