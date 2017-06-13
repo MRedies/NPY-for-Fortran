@@ -1,12 +1,13 @@
 module  m_npy
+    use endian_swap
     implicit none
 
     integer(4), parameter               :: p_un      = 23
     character, parameter                :: magic_num = achar(147) ! x93
     character, parameter                :: major     = achar(2)   !major *.npy version 
     character, parameter                :: minor     = achar(0)   !minor *.npy version
+    logical, parameter                  :: use_big_endian = .False.
     character(len=*), parameter         :: zip_flag  = "-q0"  
-    character(len=*), parameter         :: endianess = 'LITTLE_ENDIAN'
     character(len=*), parameter         :: magic_str = "NUMPY"
 
     interface save_npy
@@ -413,17 +414,27 @@ contains
         character(len=*), intent(in)     :: filename
         complex(4), intent(in)           :: mtx(:,:)
         character(len=*), parameter      :: var_type =  "<c8"
-        integer(4)                       :: header_len, s_mtx(2)
+        integer(4)                       :: header_len, s_mtx(2), i, j
 
         s_mtx = shape(mtx)
         header_len =  len(dict_str(var_type, s_mtx))
         
         open(unit=p_un, file=filename, form="unformatted",&
-             convert=endianess,access="stream")
+             access="stream")
         write (p_un) magic_num, magic_str, major, minor
         write (p_un) header_len
         write (p_un) dict_str(var_type, s_mtx)
-        write (p_un) mtx
+
+        if(use_big_endian == Big_Endian()) then  
+            write (p_un) mtx
+        else
+            do j = 1,size(mtx,2)
+                do i =  1,size(mtx,1)
+                    write (p_un) Swap_Endian(mtx(i,j))
+                enddo
+            enddo
+        endif
+
         close(unit=p_un)
     End Subroutine write_cmplx_sgn_mtx
     
@@ -432,17 +443,24 @@ contains
         character(len=*), intent(in)     :: filename
         complex(4), intent(in)           :: vec(:)
         character(len=*), parameter      :: var_type =  "<c8"
-        integer(4)                       :: header_len, s_vec(1)
+        integer(4)                       :: header_len, s_vec(1), i
 
         s_vec = shape(vec)
         header_len =  len(dict_str(var_type, s_vec))
         
         open(unit=p_un, file=filename, form="unformatted",&
-             convert=endianess,access="stream")
+             access="stream")
         write (p_un) magic_num, magic_str, major, minor
         write (p_un) header_len
         write (p_un) dict_str(var_type, s_vec)
-        write (p_un) vec
+        
+        if(use_big_endian == Big_Endian()) then  
+            write (p_un) vec
+        else
+            do i =  1,size(vec)
+                write (p_un) Swap_Endian(vec(i))
+            enddo
+        endif
         close(unit=p_un)
     End Subroutine write_cmplx_sgn_vec
 
@@ -451,17 +469,26 @@ contains
         character(len=*), intent(in)     :: filename
         complex(8), intent(in)           :: mtx(:,:)
         character(len=*), parameter      :: var_type =  "<c16"
-        integer(4)                       :: header_len, s_mtx(2)
+        integer(4)                       :: header_len, s_mtx(2),i,j
 
         s_mtx = shape(mtx)
         header_len =  len(dict_str(var_type, s_mtx))
         
         open(unit=p_un, file=filename, form="unformatted",&
-             convert=endianess,access="stream")
+             access="stream")
         write (p_un) magic_num, magic_str, major, minor
         write (p_un) header_len
         write (p_un) dict_str(var_type, s_mtx)
-        write (p_un) mtx
+        
+        if(use_big_endian == Big_Endian()) then  
+            write (p_un) mtx
+        else
+            do j = 1,size(mtx,2)
+                do i =  1,size(mtx,1)
+                    write (p_un) Swap_Endian(mtx(i,j))
+                enddo
+            enddo
+        endif
         close(unit=p_un)
     End Subroutine write_cmplx_dbl_mtx
     
@@ -470,17 +497,24 @@ contains
         character(len=*), intent(in)     :: filename
         complex(8), intent(in)           :: vec(:)
         character(len=*), parameter      :: var_type =  "<c16"
-        integer(4)                       :: header_len, s_vec(1)
+        integer(4)                       :: header_len, s_vec(1), i
 
         s_vec = shape(vec)
         header_len =  len(dict_str(var_type, s_vec))
         
         open(unit=p_un, file=filename, form="unformatted",&
-             convert=endianess,access="stream")
+             access="stream")
         write (p_un) magic_num, magic_str, major, minor
         write (p_un) header_len
         write (p_un) dict_str(var_type, s_vec)
-        write (p_un) vec
+        
+        if(use_big_endian == Big_Endian()) then  
+            write (p_un) vec
+        else
+            do i =  1,size(vec)
+                write (p_un) Swap_Endian(vec(i))
+            enddo
+        endif
         close(unit=p_un)
     End Subroutine write_cmplx_dbl_vec
 
@@ -489,17 +523,26 @@ contains
         character(len=*), intent(in)     :: filename
         real(4), intent(in)              :: mtx(:,:)
         character(len=*), parameter      :: var_type =  "<f4"
-        integer(4)                       :: header_len, s_mtx(2)
+        integer(4)                       :: header_len, s_mtx(2), i, j
 
         s_mtx = shape(mtx)
         header_len =  len(dict_str(var_type, s_mtx))
         
         open(unit=p_un, file=filename, form="unformatted",&
-             convert=endianess,access="stream")
+             access="stream")
         write (p_un) magic_num, magic_str, major, minor
         write (p_un) header_len
         write (p_un) dict_str(var_type, s_mtx)
-        write (p_un) mtx
+        
+        if(use_big_endian == Big_Endian()) then  
+            write (p_un) mtx
+        else
+            do j = 1,size(mtx,2)
+                do i =  1,size(mtx,1)
+                    write (p_un) Swap_Endian(mtx(i,j))
+                enddo
+            enddo
+        endif
         close(unit=p_un)
     End Subroutine write_sng_mtx
     
@@ -508,17 +551,24 @@ contains
         character(len=*), intent(in)     :: filename
         real(4), intent(in)              :: vec(:)
         character(len=*), parameter      :: var_type =  "<f4"
-        integer(4)                       :: header_len, s_vec(1)
+        integer(4)                       :: header_len, s_vec(1), i
 
         s_vec = shape(vec)
         header_len =  len(dict_str(var_type, s_vec))
         
         open(unit=p_un, file=filename, form="unformatted",&
-             convert=endianess,access="stream")
+             access="stream")
         write (p_un) magic_num, magic_str, major, minor
         write (p_un) header_len
         write (p_un) dict_str(var_type, s_vec)
-        write (p_un) vec
+        
+        if(use_big_endian == Big_Endian()) then  
+            write (p_un) vec
+        else
+            do i =  1,size(vec)
+                write (p_un) Swap_Endian(vec(i))
+            enddo
+        endif
         close(unit=p_un)
     End Subroutine write_sng_vec
     
@@ -527,17 +577,26 @@ contains
         character(len=*), intent(in)     :: filename
         real(8), intent(in)              :: mtx(:,:)
         character(len=*), parameter      :: var_type =  "<f8"
-        integer(4)                       :: header_len, s_mtx(2)
+        integer(4)                       :: header_len, s_mtx(2), i,j
 
         s_mtx = shape(mtx)
         header_len =  len(dict_str(var_type, s_mtx))
         
         open(unit=p_un, file=filename, form="unformatted",&
-             convert=endianess,access="stream")
+             access="stream")
         write (p_un) magic_num, magic_str, major, minor
         write (p_un) header_len
         write (p_un) dict_str(var_type, s_mtx)
-        write (p_un) mtx
+        
+        if(use_big_endian == Big_Endian()) then  
+            write (p_un) mtx
+        else
+            do j = 1,size(mtx,2)
+                do i =  1,size(mtx,1)
+                    write (p_un) Swap_Endian(mtx(i,j))
+                enddo
+            enddo
+        endif
         close(unit=p_un)
     End Subroutine write_dbl_mtx
     
@@ -546,17 +605,24 @@ contains
         character(len=*), intent(in)     :: filename
         real(8), intent(in)              :: vec(:)
         character(len=*), parameter      :: var_type =  "<f8"
-        integer(4)                       :: header_len, s_vec(1)
+        integer(4)                       :: header_len, s_vec(1), i
 
         s_vec = shape(vec)
         header_len =  len(dict_str(var_type, s_vec))
         
         open(unit=p_un, file=filename, form="unformatted",&
-             convert=endianess,access="stream")
+             access="stream")
         write (p_un) magic_num, magic_str, major, minor
         write (p_un) header_len
         write (p_un) dict_str(var_type, s_vec)
-        write (p_un) vec
+        
+        if(use_big_endian == Big_Endian()) then  
+            write (p_un) vec
+        else
+            do i =  1,size(vec)
+                write (p_un) Swap_Endian(vec(i))
+            enddo
+        endif
         close(unit=p_un)
     End Subroutine write_dbl_vec
     
@@ -565,17 +631,26 @@ contains
         character(len=*), intent(in)     :: filename
         integer(8), intent(in)           :: mtx(:,:)
         character(len=*), parameter      :: var_type =  "<i8"
-        integer(4)                       :: header_len, s_mtx(2)
+        integer(4)                       :: header_len, s_mtx(2), i, j
 
         s_mtx = shape(mtx)
         header_len =  len(dict_str(var_type, s_mtx))
         
         open(unit=p_un, file=filename, form="unformatted",&
-             convert=endianess,access="stream")
+             access="stream")
         write (p_un) magic_num, magic_str, major, minor
         write (p_un) header_len
         write (p_un) dict_str(var_type, s_mtx)
-        write (p_un) mtx
+        
+        if(use_big_endian == Big_Endian()) then  
+            write (p_un) mtx
+        else
+            do j = 1,size(mtx,2)
+                do i =  1,size(mtx,1)
+                    write (p_un) Swap_Endian(mtx(i,j))
+                enddo
+            enddo
+        endif
         close(unit=p_un)
     End Subroutine write_int64_mtx
     
@@ -584,17 +659,24 @@ contains
         character(len=*), intent(in)     :: filename
         integer(8), intent(in)           :: vec(:)
         character(len=*), parameter      :: var_type =  "<i8"
-        integer(4)                       :: header_len, s_vec(1)
+        integer(4)                       :: header_len, s_vec(1), i
 
         s_vec = shape(vec)
         header_len =  len(dict_str(var_type, s_vec))
         
         open(unit=p_un, file=filename, form="unformatted",&
-             convert=endianess,access="stream")
+             access="stream")
         write (p_un) magic_num, magic_str, major, minor
         write (p_un) header_len
         write (p_un) dict_str(var_type, s_vec)
-        write (p_un) vec
+        
+        if(use_big_endian == Big_Endian()) then  
+            write (p_un) vec
+        else
+            do i =  1,size(vec)
+                write (p_un) Swap_Endian(vec(i))
+            enddo
+        endif
         close(unit=p_un)
     End Subroutine write_int64_vec
 
@@ -604,17 +686,26 @@ contains
         character(len=*), intent(in)     :: filename
         integer(4), intent(in)           :: mtx(:,:)
         character(len=*), parameter      :: var_type =  "<i4"
-        integer(4)                       :: header_len, s_mtx(2)
+        integer(4)                       :: header_len, s_mtx(2), i, j
 
         s_mtx = shape(mtx)
         header_len =  len(dict_str(var_type, s_mtx))
         
         open(unit=p_un, file=filename, form="unformatted",&
-             convert=endianess,access="stream")
+             access="stream")
         write (p_un) magic_num, magic_str, major, minor
         write (p_un) header_len
         write (p_un) dict_str(var_type, s_mtx)
-        write (p_un) mtx
+        
+        if(use_big_endian == Big_Endian()) then  
+            write (p_un) mtx
+        else
+            do j = 1,size(mtx,2)
+                do i =  1,size(mtx,1)
+                    write (p_un) Swap_Endian(mtx(i,j))
+                enddo
+            enddo
+        endif
         close(unit=p_un)
     End Subroutine write_int32_mtx
     
@@ -623,17 +714,24 @@ contains
         character(len=*), intent(in)     :: filename
         integer(4), intent(in)           :: vec(:)
         character(len=*), parameter      :: var_type =  "<i4"
-        integer(4)                       :: header_len, s_vec(1)
+        integer(4)                       :: header_len, s_vec(1), i 
 
         s_vec = shape(vec)
         header_len =  len(dict_str(var_type, s_vec))
         
         open(unit=p_un, file=filename, form="unformatted",&
-             convert=endianess,access="stream")
+             access="stream")
         write (p_un) magic_num, magic_str, major, minor
         write (p_un) header_len
         write (p_un) dict_str(var_type, s_vec)
-        write (p_un) vec
+        
+        if(use_big_endian == Big_Endian()) then  
+            write (p_un) vec
+        else
+            do i =  1,size(vec)
+                write (p_un) Swap_Endian(vec(i))
+            enddo
+        endif
         close(unit=p_un)
     End Subroutine write_int32_vec
     
@@ -642,17 +740,26 @@ contains
         character(len=*), intent(in)     :: filename
         integer(2), intent(in)           :: mtx(:,:)
         character(len=*), parameter      :: var_type =  "<i2"
-        integer(4)                       :: header_len, s_mtx(2)
+        integer(4)                       :: header_len, s_mtx(2), i, j
 
         s_mtx = shape(mtx)
         header_len =  len(dict_str(var_type, s_mtx))
         
         open(unit=p_un, file=filename, form="unformatted",&
-             convert=endianess,access="stream")
+             access="stream")
         write (p_un) magic_num, magic_str, major, minor
         write (p_un) header_len
         write (p_un) dict_str(var_type, s_mtx)
-        write (p_un) mtx
+        
+        if(use_big_endian == Big_Endian()) then  
+            write (p_un) mtx
+        else
+            do j = 1,size(mtx,2)
+                do i =  1,size(mtx,1)
+                    write (p_un) Swap_Endian(mtx(i,j))
+                enddo
+            enddo
+        endif
         close(unit=p_un)
     End Subroutine write_int16_mtx
     
@@ -661,17 +768,24 @@ contains
         character(len=*), intent(in)     :: filename
         integer(2), intent(in)           :: vec(:)
         character(len=*), parameter      :: var_type =  "<i2"
-        integer(4)                       :: header_len, s_vec(1)
+        integer(4)                       :: header_len, s_vec(1), i
 
         s_vec = shape(vec)
         header_len =  len(dict_str(var_type, s_vec))
         
         open(unit=p_un, file=filename, form="unformatted",&
-             convert=endianess,access="stream")
+             access="stream")
         write (p_un) magic_num, magic_str, major, minor
         write (p_un) header_len
         write (p_un) dict_str(var_type, s_vec)
-        write (p_un) vec
+        
+        if(use_big_endian == Big_Endian()) then  
+            write (p_un) vec
+        else
+            do i =  1,size(vec)
+                write (p_un) Swap_Endian(vec(i))
+            enddo
+        endif
         close(unit=p_un)
     End Subroutine write_int16_vec
     
@@ -680,17 +794,26 @@ contains
         character(len=*), intent(in)     :: filename
         integer(1), intent(in)           :: mtx(:,:)
         character(len=*), parameter      :: var_type =  "<i1"
-        integer(4)                       :: header_len, s_mtx(2)
+        integer(4)                       :: header_len, s_mtx(2), i,j
 
         s_mtx = shape(mtx)
         header_len =  len(dict_str(var_type, s_mtx))
         
         open(unit=p_un, file=filename, form="unformatted",&
-             convert=endianess,access="stream")
+             access="stream")
         write (p_un) magic_num, magic_str, major, minor
         write (p_un) header_len
         write (p_un) dict_str(var_type, s_mtx)
-        write (p_un) mtx
+        
+        if(use_big_endian == Big_Endian()) then  
+            write (p_un) mtx
+        else
+            do j = 1,size(mtx,2)
+                do i =  1,size(mtx,1)
+                    write (p_un) Swap_Endian(mtx(i,j))
+                enddo
+            enddo
+        endif
         close(unit=p_un)
     End Subroutine write_int8_mtx
     
@@ -699,17 +822,24 @@ contains
         character(len=*), intent(in)     :: filename
         integer(1), intent(in)           :: vec(:)
         character(len=*), parameter      :: var_type =  "<i1"
-        integer(4)                       :: header_len, s_vec(1)
+        integer(4)                       :: header_len, s_vec(1), i
 
         s_vec = shape(vec)
         header_len =  len(dict_str(var_type, s_vec))
         
         open(unit=p_un, file=filename, form="unformatted",&
-             convert=endianess,access="stream")
+             access="stream")
         write (p_un) magic_num, magic_str, major, minor
         write (p_un) header_len
         write (p_un) dict_str(var_type, s_vec)
-        write (p_un) vec
+        
+        if(use_big_endian == Big_Endian()) then  
+            write (p_un) vec
+        else
+            do i =  1,size(vec)
+                write (p_un) Swap_Endian(vec(i))
+            enddo
+        endif
         close(unit=p_un)
     End Subroutine write_int8_vec
 
