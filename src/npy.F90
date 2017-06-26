@@ -509,7 +509,6 @@ contains
         Implicit None
         character(len=*), intent(in)     :: filename
         complex(8), intent(in)           :: vec(:)
-        complex(8)                       :: tmp
         character(len=*), parameter      :: var_type =  "<c16"
         integer(4)                       :: header_len, s_vec(1), i
 

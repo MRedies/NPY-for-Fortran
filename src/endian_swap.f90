@@ -22,7 +22,6 @@ module endian_swap
 
         FUNCTION Big_Endian()
 
-            INTEGER(1) :: Source
             LOGICAL :: Big_Endian
 
             Big_Endian = ichar(transfer(1,'a')) == 0
