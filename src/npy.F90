@@ -423,7 +423,11 @@ contains
         open(unit=p_un, file=filename, form="unformatted",&
              access="stream")
         write (p_un) magic_num, magic_str, major, minor
-        write (p_un) header_len
+        if(Big_Endian()) then
+            write (p_un) Swap_Endian(header_len)
+        else
+            write (p_un) header_len
+        endif
         write (p_un) dict_str(var_type, s_mtx)
 
         if(use_big_endian .eqv. Big_Endian()) then  
@@ -807,7 +811,11 @@ contains
         open(unit=p_un, file=filename, form="unformatted",&
              access="stream")
         write (p_un) magic_num, magic_str, major, minor
-        write (p_un) header_len
+        if(Big_Endian()) then
+            write (p_un) Swap_Endian(header_len)
+        else
+            write (p_un) header_len
+        endif
         write (p_un) dict_str(var_type, s_mtx)
         
         if(use_big_endian .eqv. Big_Endian()) then  
@@ -835,7 +843,11 @@ contains
         open(unit=p_un, file=filename, form="unformatted",&
              access="stream")
         write (p_un) magic_num, magic_str, major, minor
-        write (p_un) header_len
+        if(Big_Endian()) then
+            write (p_un) Swap_Endian(header_len)
+        else
+            write (p_un) header_len
+        endif
         write (p_un) dict_str(var_type, s_vec)
         
         if(use_big_endian .eqv. Big_Endian()) then  
@@ -861,7 +873,11 @@ contains
         open(unit=p_un, file=filename, form="unformatted",&
              access="stream")
         write (p_un) magic_num, magic_str, major, minor
-        write (p_un) header_len
+        if(Big_Endian()) then
+            write (p_un) Swap_Endian(header_len)
+        else
+            write (p_un) header_len
+        endif
         write (p_un) dict_str(var_type, s_mtx)
         
         if(use_big_endian .eqv. Big_Endian()) then  
@@ -889,7 +905,11 @@ contains
         open(unit=p_un, file=filename, form="unformatted",&
              access="stream")
         write (p_un) magic_num, magic_str, major, minor
-        write (p_un) header_len
+        if(Big_Endian()) then
+            write (p_un) Swap_Endian(header_len)
+        else
+            write (p_un) header_len
+        endif
         write (p_un) dict_str(var_type, s_vec)
         
         if(use_big_endian .eqv. Big_Endian()) then  
