@@ -2,8 +2,8 @@ program main
     use m_npy
     use endian_swap
 
-    complex(8)       :: a(10,20), b(10)
-    integer(4)       :: i, j
+    complex(8)       :: a(10,20), b(10), c(2,3,4)
+    integer(4)       :: i, j, k
     real(4)  :: test1
     real(8)  :: test2
 
@@ -17,14 +17,16 @@ program main
         b(i) = 2 *  i
     enddo
 
+    do i = 1,size(c,1)
+        do j = 1,size(c,2)
+            do k =1,size(c,3)
+                c(i,j,k) = cmplx(1, 2)
+            enddo
+        enddo
+    enddo
     
-    !call save_npy("mtx.npy", a)
-    call save_npy("vec.npy", b)
-    !call add_npz("example.npz", "vec", a)
-    !call add_npz("example.npz", "voc", b)
-    write (*,*) "Big Endian: ", Big_Endian()
-    test1 = 7.2
-    test2 =  7.2d0
-    write (*,*) "Swap: ", SWAP_endian(test1)
-    write (*,*) SWAP_endian(test2)
+    c(1,1,1) = cmplx(3,4)
+    c(2,3,4) = cmplx(0,1)
+    c(2,2,2) = cmplx(1,0)
+    call save_npy("c.npy", c)
 end program main

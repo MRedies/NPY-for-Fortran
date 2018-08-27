@@ -18,7 +18,9 @@ module  m_npy
                          write_dbl_vec,       write_dbl_mtx,   &
                          write_sng_vec,       write_sng_mtx,   &
                          write_cmplx_sgn_vec, write_cmplx_sgn_mtx, &
-                         write_cmplx_dbl_vec, write_cmplx_dbl_mtx
+                         write_cmplx_dbl_vec, write_cmplx_dbl_mtx, &
+                         write_sng_3dT,       write_dbl_3dT, &
+                         write_cmplx_dbl_3dT
 
     end interface save_npy
     interface add_npz
@@ -475,6 +477,31 @@ contains
         close(unit=p_un)
     End Subroutine write_cmplx_sgn_vec
 
+    Subroutine  write_cmplx_dbl_3dT(filename, tensor)
+        Implicit None
+        character(len=*), intent(in)     :: filename
+        complex(8), intent(in)           :: tensor(:,:,:)
+        character(len=*), parameter      :: var_type =  "<c16"
+        integer(4)                       :: header_len, i,j, k
+
+        header_len =  len(dict_str(var_type, shape(tensor)))
+        
+        open(unit=p_un, file=filename, form="unformatted",&
+             access="stream")
+        write (p_un) magic_num, magic_str, major, minor
+        if(Big_Endian()) then
+            write (*,*) "3D tensors not implemented on BigEndian"
+            write (*,*) "write in issue if you need it"
+            stop 7
+        else
+            write (p_un) header_len
+        endif
+
+        write (p_un) dict_str(var_type, shape(tensor))
+        write (p_un) tensor
+        close(unit=p_un)
+    End Subroutine write_cmplx_dbl_3dT
+
     Subroutine  write_cmplx_dbl_mtx(filename, mtx)
         Implicit None
         character(len=*), intent(in)     :: filename
@@ -540,6 +567,32 @@ contains
         endif
         close(unit=p_un)
     End Subroutine write_cmplx_dbl_vec
+
+    Subroutine  write_sng_3dT(filename, tensor)
+        Implicit None
+        character(len=*), intent(in)     :: filename
+        real(4), intent(in)              :: tensor(:,:,:)
+        character(len=*), parameter      :: var_type =  "<f4"
+        integer(4)                       :: header_len, i,j, k
+
+        header_len =  len(dict_str(var_type, shape(tensor)))
+        
+        open(unit=p_un, file=filename, form="unformatted",&
+             access="stream")
+        write (p_un) magic_num, magic_str, major, minor
+        if(Big_Endian()) then
+            write (*,*) "3D tensors not implemented on BigEndian"
+            write (*,*) "write in issue if you need it"
+            stop 7
+        else
+            write (p_un) header_len
+        endif
+
+        write (p_un) dict_str(var_type, shape(tensor))
+        write (p_un) tensor
+        close(unit=p_un)
+    End Subroutine write_sng_3dT
+
 
     Subroutine  write_sng_mtx(filename, mtx)
         Implicit None
@@ -607,6 +660,31 @@ contains
         close(unit=p_un)
     End Subroutine write_sng_vec
     
+    Subroutine  write_dbl_3dT(filename, tensor)
+        Implicit None
+        character(len=*), intent(in)     :: filename
+        real(8), intent(in)              :: tensor(:,:,:)
+        character(len=*), parameter      :: var_type =  "<f8"
+        integer(4)                       :: header_len, i,j, k
+
+        header_len =  len(dict_str(var_type, shape(tensor)))
+        
+        open(unit=p_un, file=filename, form="unformatted",&
+             access="stream")
+        write (p_un) magic_num, magic_str, major, minor
+        if(Big_Endian()) then
+            write (*,*) "3D tensors not implemented on BigEndian"
+            write (*,*) "write in issue if you need it"
+            stop 7
+        else
+            write (p_un) header_len
+        endif
+
+        write (p_un) dict_str(var_type, shape(tensor))
+        write (p_un) tensor
+        close(unit=p_un)
+    End Subroutine write_dbl_3dT
+
     Subroutine  write_dbl_mtx(filename, mtx)
         Implicit None
         character(len=*), intent(in)     :: filename
