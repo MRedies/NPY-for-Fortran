@@ -420,7 +420,6 @@ contains
 
         s_mtx = shape(mtx)
         header_len =  len(dict_str(var_type, s_mtx))
-        write (*,*) "Warning: write cmplx not supported by XLF"
         
         open(unit=p_un, file=filename, form="unformatted",&
              access="stream")
@@ -454,7 +453,6 @@ contains
 
         s_vec = shape(vec)
         header_len =  len(dict_str(var_type, s_vec))
-        write (*,*) "Warning: write cmplx not supported by XLF"
         
         open(unit=p_un, file=filename, form="unformatted",&
              access="stream")
@@ -511,7 +509,6 @@ contains
 
         s_mtx = shape(mtx)
         header_len =  len(dict_str(var_type, s_mtx))
-        write (*,*) "Warning: write cmplx not supported by XLF"
         
         open(unit=p_un, file=filename, form="unformatted",&
              access="stream")
@@ -545,7 +542,6 @@ contains
 
         s_vec = shape(vec)
         header_len =  len(dict_str(var_type, s_vec))
-        write (*,*) "Warning: write cmplx not supported by XLF"
 
         open(unit=p_un, file=filename, form="unformatted",&
              access="stream")
@@ -604,7 +600,6 @@ contains
         s_mtx = shape(mtx)
         header_len =  len(dict_str(var_type, s_mtx))
     
-        write (*,*) "Warning: write cmplx not supported by XLF"
         
         open(unit=p_un, file=filename, form="unformatted",&
              access="stream")
