@@ -1043,7 +1043,6 @@ contains
             str =  trim(str) // adjustl(small_str)
         enddo
         
-        allocate(character(len(trim(str))) :: fin_str)
         fin_str =  trim(str)
     end function shape_str 
 end module  m_npy
