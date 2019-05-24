@@ -24,7 +24,8 @@ module  m_npy
                          write_dbl_5dT,&
                          write_cmplx_dbl_3dT,&
                          write_cmplx_dbl_4dT,&
-                         write_cmplx_dbl_5dT
+                         write_cmplx_dbl_5dT,&
+                         write_cmplx_dbl_6dT
 
 
     end interface save_npy
@@ -481,6 +482,31 @@ contains
     End Subroutine write_cmplx_sgn_vec
 
 
+    Subroutine  write_cmplx_dbl_6dT(filename, tensor)
+        Implicit None
+        character(len=*), intent(in)     :: filename
+        complex(8), intent(in)           :: tensor(:,:,:,:,:,:)
+        character(len=*), parameter      :: var_type =  "<c16"
+        integer(4)                       :: header_len, i,j, k
+
+        header_len =  len(dict_str(var_type, shape(tensor)))
+        
+        open(unit=p_un, file=filename, form="unformatted",&
+             access="stream")
+        write (p_un) magic_num, magic_str, major, minor
+        if(Big_Endian()) then
+            write (*,*) "6D tensors not implemented on BigEndian"
+            write (*,*) "write in issue if you need it"
+            stop 7
+        else
+            write (p_un) header_len
+        endif
+
+        write (p_un) dict_str(var_type, shape(tensor))
+        write (p_un) tensor
+        close(unit=p_un)
+    End Subroutine write_cmplx_dbl_6dT
+
     Subroutine  write_cmplx_dbl_5dT(filename, tensor)
         Implicit None
         character(len=*), intent(in)     :: filename
@@ -494,7 +520,7 @@ contains
              access="stream")
         write (p_un) magic_num, magic_str, major, minor
         if(Big_Endian()) then
-            write (*,*) "3D tensors not implemented on BigEndian"
+            write (*,*) "5D tensors not implemented on BigEndian"
             write (*,*) "write in issue if you need it"
             stop 7
         else
@@ -519,7 +545,7 @@ contains
              access="stream")
         write (p_un) magic_num, magic_str, major, minor
         if(Big_Endian()) then
-            write (*,*) "3D tensors not implemented on BigEndian"
+            write (*,*) "4D tensors not implemented on BigEndian"
             write (*,*) "write in issue if you need it"
             stop 7
         else
@@ -778,7 +804,7 @@ contains
              access="stream")
         write (p_un) magic_num, magic_str, major, minor
         if(Big_Endian()) then
-            write (*,*) "4D tensors not implemented on BigEndian"
+            write (*,*) "5D tensors not implemented on BigEndian"
             write (*,*) "write in issue if you need it"
             stop 7
         else
