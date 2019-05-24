@@ -24,7 +24,8 @@ module  m_npy
                          write_dbl_5dT,&
                          write_cmplx_dbl_3dT,&
                          write_cmplx_dbl_4dT,&
-                         write_cmplx_dbl_5dT
+                         write_cmplx_dbl_5dT,&
+                         write_cmplx_dbl_6dT
 
 
     end interface save_npy
@@ -504,7 +505,7 @@ contains
         write (p_un) dict_str(var_type, shape(tensor))
         write (p_un) tensor
         close(unit=p_un)
-    End Subroutine write_cmplx_dbl_5dT
+    End Subroutine write_cmplx_dbl_6dT
 
     Subroutine  write_cmplx_dbl_5dT(filename, tensor)
         Implicit None
