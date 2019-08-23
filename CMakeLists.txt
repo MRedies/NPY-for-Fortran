@@ -1,6 +1,12 @@
 cmake_minimum_required(VERSION 2.8)
 project(STB)
 
+
+
+
+
+
+
 file(GLOB_RECURSE sources  src/*.f90
                            src/*.F90
                            src/*.h )
@@ -18,6 +24,9 @@ if(CMAKE_Fortran_COMPILER_ID MATCHES "GNU")
 endif()
 if(CMAKE_Fortran_COMPILER_ID MATCHES "Intel")
 	#set(bounds "-check bounds")
+	if(CMAKE_Fortran_COMPILER_VERSION VERSION_LESS "16.0.0.20161018")
+		add_definitions(-DOLD_INTEL)
+	endif()
 endif()
 if(CMAKE_Fortran_COMPILER_ID MATCHES "PGI")
     set(dialect "-Mfreeform -Mdclchk -Mstandard -Mallocatable=03")

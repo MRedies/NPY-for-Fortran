@@ -1,5 +1,8 @@
 module  m_npy
     use endian_swap
+#ifdef OLD_INTEL
+    use ifport 
+#endif
     implicit none
 
     integer(4), parameter               :: p_un      = 23
@@ -45,8 +48,11 @@ contains
         implicit none
         character(len=*), intent(in)     :: cmd
         integer(4), intent(out)          :: stat
-        
+#ifdef OLD_INTEL
+        stat    =   system(cmd)
+#else        
         call execute_command_line(cmd, wait=.True., exitstat=stat)
+#endif
     end subroutine run_sys
     
     subroutine addrpl_cmplx_sng_vec(zipfile, var_name, vec)
