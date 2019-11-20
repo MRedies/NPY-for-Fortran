@@ -11,17 +11,6 @@ Saving an array into a .npy-file is simply done by calling:
 call save_npy("filename.npy", array)
 ```
 
-
-### *.npz files
-In order to save .npz-files the commandline tool 'zip' has to be installed. By calling 
-```fortran
-call add_npz("example.npz", "temperature", data_array)
-```
-one creates an .npz-file containing data_array, with the name "temperature". If example.npz already exists the field "temperature" is added to it. If the field temperature already exsits in example.npz it will be overwritten.
-
-
-Reading .npy and .npz files isn't currently supported. (Maybe someone can give me ideas on dynamic typing in Fortran...)
-
 ### Compiling using ifort
 
 The code uses the somewhat out-dated 
