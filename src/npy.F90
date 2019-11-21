@@ -8,11 +8,15 @@ module m_npy
    character(len=*), parameter         :: magic_str = "NUMPY"
 
    interface save_npy
-      module procedure write_int64_gen, &
+      module procedure &
+         write_int64_gen, &
          write_int32_gen, &
+         write_int16_gen, &
+         write_int8_gen, &
+         write_sng_gen, &
          write_dbl_gen, &
-         write_cmplx_dbl_gen, &
-         write_sng_gen
+         write_cmplx_sng_gen, &
+         write_cmplx_dbl_gen
    end interface save_npy
 contains
    subroutine write_cmplx_dbl_gen(filename, array)
@@ -90,6 +94,31 @@ contains
       close (unit=p_un)
    end subroutine write_sng_gen
 
+   subroutine write_cmplx_sng_gen(filename, array)
+      use iso_c_binding
+      implicit none
+      character(len=*), intent(in)     :: filename
+      complex(4), intent(in), target   :: array(..)
+      character(len=*), parameter      :: var_type = "<c8"
+      integer(4)                       :: header_len, i
+      integer(4), allocatable          :: s_array(:)
+      complex(4), pointer              :: output_array(:)
+
+      s_array = shape(array)
+      header_len = len(dict_str(var_type, s_array))
+
+      open (unit=p_un, file=filename, form="unformatted", &
+            access="stream")
+      write (p_un) magic_num, magic_str, major, minor
+      write (p_un) header_len
+      write (p_un) dict_str(var_type, s_array)
+
+      call c_f_pointer(c_loc(array), output_array, [size(array)])
+      write (p_un) output_array
+
+      close (unit=p_un)
+   end subroutine write_cmplx_sng_gen
+
    subroutine write_int64_gen(filename, array)
       use iso_c_binding
       implicit none
@@ -139,6 +168,56 @@ contains
 
       close (unit=p_un)
    end subroutine write_int32_gen
+
+   subroutine write_int16_gen(filename, array)
+      use iso_c_binding
+      implicit none
+      character(len=*), intent(in)     :: filename
+      integer(2), intent(in), target   :: array(..)
+      character(len=*), parameter      :: var_type = "<i2"
+      integer(4)                       :: header_len, i
+      integer(4), allocatable          :: s_array(:)
+      integer(2), pointer              :: output_array(:)
+
+      s_array = shape(array)
+      header_len = len(dict_str(var_type, s_array))
+
+      open (unit=p_un, file=filename, form="unformatted", &
+            access="stream")
+      write (p_un) magic_num, magic_str, major, minor
+      write (p_un) header_len
+      write (p_un) dict_str(var_type, s_array)
+
+      call c_f_pointer(c_loc(array), output_array, [size(array)])
+      write (p_un) output_array
+
+      close (unit=p_un)
+   end subroutine write_int16_gen
+
+   subroutine write_int8_gen(filename, array)
+      use iso_c_binding
+      implicit none
+      character(len=*), intent(in)     :: filename
+      integer(1), intent(in), target   :: array(..)
+      character(len=*), parameter      :: var_type = "<i1"
+      integer(4)                       :: header_len, i
+      integer(4), allocatable          :: s_array(:)
+      integer(1), pointer              :: output_array(:)
+
+      s_array = shape(array)
+      header_len = len(dict_str(var_type, s_array))
+
+      open (unit=p_un, file=filename, form="unformatted", &
+            access="stream")
+      write (p_un) magic_num, magic_str, major, minor
+      write (p_un) header_len
+      write (p_un) dict_str(var_type, s_array)
+
+      call c_f_pointer(c_loc(array), output_array, [size(array)])
+      write (p_un) output_array
+
+      close (unit=p_un)
+   end subroutine write_int8_gen
 
    function dict_str(var_type, var_shape) result(str)
       implicit none
