@@ -10,5 +10,5 @@ Saving an array into a .npy-file is simply done by calling:
 ```fortran
 call save_npy("filename.npy", array)
 ```
-### pull requests are welcome!
+### Pull requests are welcome!
 I see many of you have created forks. Let's not scatter this library over 500 projects, let's work on one repo together.
