@@ -23,7 +23,11 @@ module m_npy
          write_cmplx_dbl_3dT, &
          write_cmplx_dbl_4dT, &
          write_cmplx_dbl_5dT, &
-         write_cmplx_dbl_6dT
+         write_cmplx_dbl_6dT, &
+         write_int64_mtx_3d, &
+         write_int16_mtx_3d, &
+         write_cmplx_sgn_mtx_3d
+
 
    end interface save_npy
    interface add_npz
@@ -34,7 +38,15 @@ module m_npy
          addrpl_sng_vec, addrpl_sng_mtx, &
          addrpl_dbl_vec, addrpl_dbl_mtx, &
          addrpl_cmplx_dbl_vec, addrpl_cmplx_dbl_mtx, &
-         addrpl_cmplx_sng_vec, addrpl_cmplx_sng_mtx
+         addrpl_cmplx_sng_vec, addrpl_cmplx_sng_mtx, &
+         addrpl_int8_mtx_3d, &
+         addrpl_int16_mtx_3d, &
+         addrpl_int32_mtx_3d, &
+         addrpl_int64_mtx_3d, &
+         addrpl_sng_mtx_3d, &
+         addrpl_dbl_mtx_3d, &
+         addrpl_cmplx_dbl_mtx_3d, &
+         addrpl_cmplx_sng_mtx_3d
    end interface add_npz
 
 contains
@@ -92,6 +104,29 @@ contains
       endif
    end subroutine addrpl_cmplx_sng_mtx
 
+   subroutine addrpl_cmplx_sng_mtx_3d(zipfile, var_name, mtx)
+      implicit none
+      complex(4), intent(in)           :: mtx(:, :, :)
+      character(len=*), intent(in)     :: zipfile, var_name
+      character(len=:), allocatable    :: npy_name
+      integer(4)                       :: succ
+
+      npy_name = var_name//".npy"
+
+      call save_npy(npy_name, mtx)
+      ! just store and be quite while zipping
+      call run_sys("zip "//zip_flag//" "//zipfile &
+                   //" "//npy_name, succ)
+      if (succ /= 0) then
+         write (*, *) "Can't execute zip command"
+      endif
+
+      call run_sys("rm "//npy_name, succ)
+      if (succ /= 0) then
+         write (*, *) "Can't execute rm command"
+      endif
+   end subroutine addrpl_cmplx_sng_mtx_3d
+
    subroutine addrpl_cmplx_dbl_vec(zipfile, var_name, vec)
       implicit none
       complex(8), intent(in)           :: vec(:)
@@ -137,6 +172,29 @@ contains
          write (*, *) "Can't execute rm command"
       endif
    end subroutine addrpl_cmplx_dbl_mtx
+
+   subroutine addrpl_cmplx_dbl_mtx_3d(zipfile, var_name, mtx)
+      implicit none
+      complex(8), intent(in)           :: mtx(:, :, :)
+      character(len=*), intent(in)     :: zipfile, var_name
+      character(len=:), allocatable    :: npy_name
+      integer(4)                       :: succ
+
+      npy_name = var_name//".npy"
+
+      call save_npy(npy_name, mtx)
+      ! just store and be quite while zipping
+      call run_sys("zip "//zip_flag//" "//zipfile &
+                   //" "//npy_name, succ)
+      if (succ /= 0) then
+         write (*, *) "Can't execute zip command"
+      endif
+
+      call run_sys("rm "//npy_name, succ)
+      if (succ /= 0) then
+         write (*, *) "Can't execute rm command"
+      endif
+   end subroutine addrpl_cmplx_dbl_mtx_3d
 
    subroutine addrpl_dbl_vec(zipfile, var_name, vec)
       implicit none
@@ -184,6 +242,29 @@ contains
       endif
    end subroutine addrpl_dbl_mtx
 
+   subroutine addrpl_dbl_mtx_3d(zipfile, var_name, mtx)
+      implicit none
+      real(8), intent(in)           :: mtx(:, :, :)
+      character(len=*), intent(in)     :: zipfile, var_name
+      character(len=:), allocatable    :: npy_name
+      integer(4)                       :: succ
+
+      npy_name = var_name//".npy"
+
+      call save_npy(npy_name, mtx)
+      ! just store and be quite while zipping
+      call run_sys("zip "//zip_flag//" "//zipfile &
+                   //" "//npy_name, succ)
+      if (succ /= 0) then
+         write (*, *) "Can't execute zip command"
+      endif
+
+      call run_sys("rm "//npy_name, succ)
+      if (succ /= 0) then
+         write (*, *) "Can't execute rm command"
+      endif
+   end subroutine addrpl_dbl_mtx_3d
+
    subroutine addrpl_sng_vec(zipfile, var_name, vec)
       implicit none
       real(4), intent(in)           :: vec(:)
@@ -229,6 +310,29 @@ contains
          write (*, *) "Can't execute rm command"
       endif
    end subroutine addrpl_sng_mtx
+
+   subroutine addrpl_sng_mtx_3d(zipfile, var_name, mtx)
+      implicit none
+      real(4), intent(in)           :: mtx(:, :, :)
+      character(len=*), intent(in)     :: zipfile, var_name
+      character(len=:), allocatable    :: npy_name
+      integer(4)                       :: succ
+
+      npy_name = var_name//".npy"
+
+      call save_npy(npy_name, mtx)
+      ! just store and be quite while zipping
+      call run_sys("zip "//zip_flag//" "//zipfile &
+                   //" "//npy_name, succ)
+      if (succ /= 0) then
+         write (*, *) "Can't execute zip command"
+      endif
+
+      call run_sys("rm "//npy_name, succ)
+      if (succ /= 0) then
+         write (*, *) "Can't execute rm command"
+      endif
+   end subroutine addrpl_sng_mtx_3d
 
    subroutine addrpl_int8_vec(zipfile, var_name, vec)
       implicit none
@@ -276,6 +380,29 @@ contains
       endif
    end subroutine addrpl_int8_mtx
 
+   subroutine addrpl_int8_mtx_3d(zipfile, var_name, mtx)
+      implicit none
+      integer(1), intent(in)           :: mtx(:, :, :)
+      character(len=*), intent(in)     :: zipfile, var_name
+      character(len=:), allocatable    :: npy_name
+      integer(4)                       :: succ
+
+      npy_name = var_name//".npy"
+
+      call save_npy(npy_name, mtx)
+      ! just store and be quite while zipping
+      call run_sys("zip "//zip_flag//" "//zipfile &
+                   //" "//npy_name, succ)
+      if (succ /= 0) then
+         write (*, *) "Can't execute zip command"
+      endif
+
+      call run_sys("rm "//npy_name, succ)
+      if (succ /= 0) then
+         write (*, *) "Can't execute rm command"
+      endif
+   end subroutine addrpl_int8_mtx_3d
+
    subroutine addrpl_int16_vec(zipfile, var_name, vec)
       implicit none
       integer(2), intent(in)           :: vec(:)
@@ -321,6 +448,29 @@ contains
          write (*, *) "Can't execute rm command"
       endif
    end subroutine addrpl_int16_mtx
+
+   subroutine addrpl_int16_mtx_3d(zipfile, var_name, mtx)
+      implicit none
+      integer(2), intent(in)           :: mtx(:, :, :)
+      character(len=*), intent(in)     :: zipfile, var_name
+      character(len=:), allocatable    :: npy_name
+      integer(4)                       :: succ
+
+      npy_name = var_name//".npy"
+
+      call save_npy(npy_name, mtx)
+      ! just store and be quite while zipping
+      call run_sys("zip "//zip_flag//" "//zipfile &
+                   //" "//npy_name, succ)
+      if (succ /= 0) then
+         write (*, *) "Can't execute zip command"
+      endif
+
+      call run_sys("rm "//npy_name, succ)
+      if (succ /= 0) then
+         write (*, *) "Can't execute rm command"
+      endif
+   end subroutine addrpl_int16_mtx_3d
 
    subroutine addrpl_int32_vec(zipfile, var_name, vec)
       implicit none
@@ -368,6 +518,29 @@ contains
       endif
    end subroutine addrpl_int32_mtx
 
+   subroutine addrpl_int32_mtx_3d(zipfile, var_name, mtx)
+      implicit none
+      integer(4), intent(in)           :: mtx(:, :, :)
+      character(len=*), intent(in)     :: zipfile, var_name
+      character(len=:), allocatable    :: npy_name
+      integer(4)                       :: succ
+
+      npy_name = var_name//".npy"
+
+      call save_npy(npy_name, mtx)
+      ! just store and be quite while zipping
+      call run_sys("zip "//zip_flag//" "//zipfile &
+                   //" "//npy_name, succ)
+      if (succ /= 0) then
+         write (*, *) "Can't execute zip command"
+      endif
+
+      call run_sys("rm "//npy_name, succ)
+      if (succ /= 0) then
+         write (*, *) "Can't execute rm command"
+      endif
+   end subroutine addrpl_int32_mtx_3d
+
    subroutine addrpl_int64_vec(zipfile, var_name, vec)
       implicit none
       integer(8), intent(in)           :: vec(:)
@@ -414,6 +587,29 @@ contains
       endif
    end subroutine addrpl_int64_mtx
 
+   subroutine addrpl_int64_mtx_3d(zipfile, var_name, mtx)
+      implicit none
+      integer(8), intent(in)           :: mtx(:, :, :)
+      character(len=*), intent(in)     :: zipfile, var_name
+      character(len=:), allocatable    :: npy_name
+      integer(4)                       :: succ
+
+      npy_name = var_name//".npy"
+
+      call save_npy(npy_name, mtx)
+      ! just store and be quite while zipping
+      call run_sys("zip "//zip_flag//" "//zipfile &
+                   //" "//npy_name, succ)
+      if (succ /= 0) then
+         write (*, *) "Can't execute zip command"
+      endif
+
+      call run_sys("rm "//npy_name, succ)
+      if (succ /= 0) then
+         write (*, *) "Can't execute rm command"
+      endif
+   end subroutine addrpl_int64_mtx_3d
+
    Subroutine write_cmplx_sgn_mtx(filename, mtx)
       Implicit None
       character(len=*), intent(in)     :: filename
@@ -434,6 +630,27 @@ contains
 
       close (unit=p_un)
    End Subroutine write_cmplx_sgn_mtx
+
+   Subroutine write_cmplx_sgn_mtx_3d(filename, mtx)
+      Implicit None
+      character(len=*), intent(in)     :: filename
+      complex(4), intent(in)           :: mtx(:, :, :)
+      character(len=*), parameter      :: var_type = "<c8"
+      integer(4)                       :: header_len, s_mtx(3), i, j, k
+
+      s_mtx = shape(mtx)
+      header_len = len(dict_str(var_type, s_mtx))
+
+      open (unit=p_un, file=filename, form="unformatted", &
+            access="stream")
+      write (p_un) magic_num, magic_str, major, minor
+      write (p_un) header_len
+      write (p_un) dict_str(var_type, s_mtx)
+
+      write (p_un) mtx
+
+      close (unit=p_un)
+   End Subroutine write_cmplx_sgn_mtx_3d
 
    Subroutine write_cmplx_sgn_vec(filename, vec)
       Implicit None
@@ -798,6 +1015,29 @@ contains
       close (unit=p_un)
    End Subroutine write_int64_mtx
 
+   Subroutine write_int64_mtx_3d(filename, mtx)
+      Implicit None
+      character(len=*), intent(in)     :: filename
+      integer(8), intent(in)           :: mtx(:, :, :)
+      character(len=*), parameter      :: var_type = "<i8"
+      integer(4)                       :: header_len, s_mtx(3), i, j, k
+
+      s_mtx = shape(mtx)
+      header_len = len(dict_str(var_type, s_mtx))
+
+      open (unit=p_un, file=filename, form="unformatted", &
+            access="stream")
+      write (p_un) magic_num, magic_str, major, minor
+
+      write (p_un) header_len
+
+      write (p_un) dict_str(var_type, s_mtx)
+
+      write (p_un) mtx
+
+      close (unit=p_un)
+   End Subroutine write_int64_mtx_3d
+
    Subroutine write_int64_vec(filename, vec)
       Implicit None
       character(len=*), intent(in)     :: filename
@@ -912,6 +1152,29 @@ contains
 
       close (unit=p_un)
    End Subroutine write_int16_mtx
+
+   Subroutine write_int16_mtx_3d(filename, mtx)
+      Implicit None
+      character(len=*), intent(in)     :: filename
+      integer(2), intent(in)           :: mtx(:, :, :)
+      character(len=*), parameter      :: var_type = "<i2"
+      integer(4)                       :: header_len, s_mtx(3), i, j, k
+
+      s_mtx = shape(mtx)
+      header_len = len(dict_str(var_type, s_mtx))
+
+      open (unit=p_un, file=filename, form="unformatted", &
+            access="stream")
+      write (p_un) magic_num, magic_str, major, minor
+
+      write (p_un) header_len
+
+      write (p_un) dict_str(var_type, s_mtx)
+
+      write (p_un) mtx
+
+      close (unit=p_un)
+   End Subroutine write_int16_mtx_3d
 
    Subroutine write_int16_vec(filename, vec)
       Implicit None
