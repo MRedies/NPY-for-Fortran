@@ -1,3 +1,5 @@
+### I don't use Fortran anymore, so I don't actively maintain this repo. If someone wants to take on the job please reach out.
+
 # NPY for Fortran
 This Fortran module allows to save numerical Fortran arrays in Numpy's .npy or .npz format. Currently supported are:
 ```fortran
